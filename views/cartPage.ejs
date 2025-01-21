@@ -1,0 +1,89 @@
+<% layout('./boilerplates/layout') %>
+
+    <body onload="updateTotalItemPrice()">
+        <div id="heroSection">
+            <p>your selected</p>
+            <p>Menu's</p>
+        </div>
+        <!-- <%- include('./includes/searchbar.ejs') %> -->
+        <div id="categoryMenuListMainContainer" class="cartPaneMainContainer">
+            <div class="categoryMenuListBox" itemNo="0">
+                <a class="categoryMenuListInnerBox1" href="12">
+                    <img src="/assets/corn.jpg" alt="">
+                </a>
+                <div class="categoryMenuListInnerBox2">
+                    <a class="categoryMenuListBoxMenuInfo" href="12">
+                        <p class="categoryMenuListBoxMenuTitle">Corn Plate</p>
+                        <p class="categoryMenuListBoxMenuDescription">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
+                        </p>
+                    </a>
+                    <div class="categoryMenuListBoxMenuPriceSection">
+                        <div>
+                            <i class="fa-solid fa-indian-rupee-sign"></i><span class="cartPageQntyPrice"
+                                itemPrice="150">150</span>
+                        </div>
+                        <div class="cartPageQntyController">
+                            <span><i class="fa-solid fa-square-minus decrementQntyBtn"></i></span>
+                            <span class="qnty" qnty="1">1</span>
+                            <span><i class="fa-solid fa-square-plus incrementQntyBtn"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="categoryMenuListBox" itemNo="1">
+                <a class="categoryMenuListInnerBox1" href="12">
+                    <img src="/assets/paneer.jpg" alt="">
+                </a>
+                <div class="categoryMenuListInnerBox2">
+                    <a class="categoryMenuListBoxMenuInfo" href="12">
+                        <p class="categoryMenuListBoxMenuTitle">Fry Paneer</p>
+                        <p class="categoryMenuListBoxMenuDescription">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
+                        </p>
+                    </a>
+                    <div class="categoryMenuListBoxMenuPriceSection">
+                        <div>
+                            <i class="fa-solid fa-indian-rupee-sign"></i><span class="cartPageQntyPrice"
+                                itemPrice="250">250</span>
+                        </div>
+                        <div class="cartPageQntyController">
+                            <span><i class="fa-solid fa-square-minus decrementQntyBtn"></i></span>
+                            <span class="qnty" qnty="1">1</span>
+                            <span><i class="fa-solid fa-square-plus incrementQntyBtn"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="categoryMenuListBox" itemNo="2">
+                <a class="categoryMenuListInnerBox1" href="12">
+                    <img src="/assets/dal.jpg" alt="">
+                </a>
+                <div class="categoryMenuListInnerBox2">
+                    <a class="categoryMenuListBoxMenuInfo" href="12">
+                        <p class="categoryMenuListBoxMenuTitle">Dal</p>
+                        <p class="categoryMenuListBoxMenuDescription">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
+                        </p>
+                    </a>
+                    <div class="categoryMenuListBoxMenuPriceSection">
+                        <div>
+                            <i class="fa-solid fa-indian-rupee-sign"></i><span class="cartPageQntyPrice"
+                                itemPrice="50">50</span>
+                        </div>
+                        <div class="cartPageQntyController">
+                            <span><i class="fa-solid fa-square-minus decrementQntyBtn"></i></span>
+                            <span class="qnty" qnty="1">1</span>
+                            <span><i class="fa-solid fa-square-plus incrementQntyBtn"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="placeOrderContainer">
+                <p id="TotalItemPrice">Total : <i class="fa-solid fa-indian-rupee-sign"></i><span>1200</span></p>
+                <button id="placeOrderBtn">Place Orders</button>
+            </div>
+        </div>
+    </body>

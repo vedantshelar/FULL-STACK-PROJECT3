@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div id="adminMainContainer">
+        <div id="adminNavBarContainer">
+            <div id="adminNavBar">
+                <a class="adminMenus" href="/admin/profile">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <a class="adminMenus" href="/admin">
+                    <i class="fa-solid fa-chart-line"></i>
+                </a>
+                <a class="adminMenus" href="/admin/home">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </a>
+                <a class="adminMenus" href="/admin/about">
+                    <i class="fa-solid fa-list-check"></i>
+                </a>
+                <a class="adminMenus" href="/admin/menu">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </a>
+                <a class="adminMenus" href="/admin/report">
+                    <i class="fa-solid fa-square-poll-horizontal"></i>
+                </a>
+            </div>
+        </div>
+        <div id="adminDashboardContainer">
+           <div id="adminDashboarNavContainer">
+            <i class="fa-brands fa-slack"></i><p>Dashboard</p>
+           </div>
+           <div id="adminPanelMainContainer">
+                <div class="adminPanelInnerMainContainer1">
+                    <div class="adminPanelInnerMainContainer1InfoContainer">
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Total Revenue</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                        </div>
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Total Profit</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="adminPanelInnerMainContainer1GraphContainer">
+                        <div>
+                            <p>Revenue</p><div><button>Revenue</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Profit</button></div>
+                        </div>
+                        <canvas id="revenueGraph"></canvas>
+                    </div>
+                </div>
+                <hr>
+                <div class="adminPanelInnerMainContainer1">
+                    <div class="adminPanelInnerMainContainer1InfoContainer">
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Monthly Revenue</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                        </div>
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Weekly Revenue</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Daily Revenue</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="adminPanelInnerMainContainer1GraphContainer">
+                        <div>
+                            <p>Revenue</p><div><button>Monthly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Weekly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Daily</button></div>
+                        </div>
+                        <canvas id="revenueGraph2"></canvas>
+                    </div>
+                </div>
+                <hr>
+                <div class="adminPanelInnerMainContainer1">
+                    <div class="adminPanelInnerMainContainer1InfoContainer">
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Monthly Profit</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                        </div>
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Weekly Profit</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="adminPanelInnerMainContainer1InfoContainerBox">
+                            <div>
+                                <p>Daily Profit</p>
+                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="adminPanelInnerMainContainer1GraphContainer">
+                        <div>
+                            <p>Profit</p><div><button>Monthly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Weekly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Daily</button></div>
+                        </div>
+                        <canvas id="revenueGraph3"></canvas>
+                    </div>
+                </div>
+                <hr>
+                <div class="adminPanelInnerMainContainerDoughnutGraphContainer">
+                    <div>
+                        <p>Popular Categories</p>
+                        <div>
+                            <canvas id="revenueGraph4"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Popular Menu's</p>
+                         <div>
+                            <canvas id="revenueGraph5"></canvas>
+                         </div>
+                    </div>
+                </div>
+           </div> 
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/7e49fc305e.js" crossorigin="anonymous"></script>
+    <script src="/js/admin.js"></script>
+</body>
+</html>

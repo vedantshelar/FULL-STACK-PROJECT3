@@ -1,0 +1,101 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root{
+    --button-color:#F5C113;
+    --background-color:#FAFAFC;
+    --searchbox-bg-color:#FFFFFF;
+    --menubox-bg-color:#FFFFFF;
+    --bold-price-color:#BA704D;
+    --text-color:#2F3438;
+}
+
+body{
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: var(--background-color);
+}
+
+#signupPageMainContainer{
+    height: 95vh;
+    width: 100vw;
+    font-size: 3rem; 
+    padding:20px 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+}
+
+#signupPageLogoAndTitleContainer{
+    width: 100%;
+    color:var(--text-color);
+    padding: 20px;
+}
+
+#signupPageLogoAndTitleContainer > p:nth-child(1){
+    font-size: 3.5rem;
+    font-weight: 500;
+}
+
+#signupPageLogoAndTitleContainer > p:nth-child(2){
+    font-size: 5.5rem;   
+    font-weight: 700;
+}
+
+
+#signupForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    row-gap: 70px;
+    padding: 10px 20px;
+}
+
+.formControls{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    color: var(--text-color);
+    font-size: 3rem;
+    width: 100%;
+    font-weight: 500;
+}
+
+.formControls > input{
+    background-color: rgba(227, 227, 227, 0.295);
+    border: none;
+    outline: none;
+    font-size: 2.5rem;
+    width: 100%;
+    align-self: center;
+    padding: 40px;
+    border-radius: 50px;
+    color: rgba(0, 0, 0, 0.621);
+}
+
+.forgetPasswordformControls{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forgetPasswordformControls > a{
+    text-decoration: none;
+    padding-right: 20px;
+    color: var(--button-color);
+    font-size: 2.5rem;
+
+}
+
+.signupBtn{
+    font-size: 3rem;
+    padding: 40px;
+    width: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: var(--button-color);
+    color: white;
+    font-weight: 600;
+}

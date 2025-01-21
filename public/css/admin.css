@@ -1,0 +1,220 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+   --admin-navbgclr:#010101;
+   --admin-bgclr:#F8F8F8;
+   --admin-foregroundclr:#FFFFFF;
+
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+}
+
+#adminMainContainer{
+border: 1px solid black;
+width: 100vw;
+height: 100vh;
+display: flex;
+flex-direction: row;
+}
+
+#adminNavBarContainer{
+    background-color: var(--admin-navbgclr);
+    width: 60px;
+    height: 100%;
+    position: relative;
+}
+
+#adminNavBar{
+    width: 100%;
+    height: 100%;
+    background-color: var(--admin-navbgclr);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0px 10px;
+}
+
+#adminNavBar > a:nth-child(1){
+    margin: 0px;
+    width: 100%;
+    border-bottom: 1px solid rgb(52, 52, 52);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#adminNavBar > a:nth-child(1) > i{
+    font-size: 2rem;
+}
+/* 
+#adminNavBar > a:nth-child(2){
+    border-left: 5px solid rgb(222, 168, 255);
+}
+
+#adminNavBar > a:nth-child(2) > i{
+    color: rgb(222, 168, 255);
+} */
+
+.activeNavOption{
+    border-left: 5px solid rgb(222, 168, 255);
+}
+
+#adminNavBar > a{
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px 0px;
+}
+
+#adminNavBar > a > i{
+    font-size: 1.5rem;
+    color: white;
+}
+
+#adminDashboardContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#adminDashboarNavContainer{
+    padding-left: 20px;
+    background-color: var(--admin-foregroundclr);
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 1px 5px rgb(197, 197, 197);
+}
+
+#adminDashboarNavContainer > p{
+    color: var(--admin-navbgclr);
+    font-size: 2rem;
+    padding: 12px 0px;
+    font-weight: 600;
+}
+
+#adminDashboarNavContainer > i{
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+#adminPanelMainContainer{
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 100px;
+    overflow-y: auto;
+    background-color: var(--admin-bgclr);
+}
+
+.adminPanelInnerMainContainer1{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.adminPanelInnerMainContainer1InfoContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 10px;
+}
+
+.adminPanelInnerMainContainer1InfoContainerBox{
+     width: 50%;
+     padding: 30px 10px;
+     background-color: var(--admin-navbgclr);
+     color: white;
+     border-radius: 5px;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+}
+
+.adminPanelInnerMainContainer1InfoContainerBox > div:nth-child(1) > p:nth-child(1){
+font-size: 1.8rem;
+}
+
+.adminPanelInnerMainContainer1InfoContainerBox > div:nth-child(1) > p:nth-child(2){
+font-size: 1.4rem;
+margin-top: 10px;
+padding-left: 10px;
+}
+
+.adminPanelInnerMainContainer1InfoContainerBox > div:nth-child(2) > i{
+    font-size: 1.5rem;
+}
+
+.adminPanelInnerMainContainer1GraphContainer > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 30px;
+    align-items: center;
+    height: 15%;
+    width: 100%;
+}
+
+.adminPanelInnerMainContainer1GraphContainer > div > p{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.adminPanelInnerMainContainer1GraphContainer > div > div{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    height: 85%;
+}
+
+
+.adminPanelInnerMainContainer1GraphContainer > div > div > button{
+   width: 100px;
+   padding: 10px 5px;
+   background-color:var(--admin-navbgclr);
+   color: white;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+}
+
+.adminPanelInnerMainContainer1GraphContainerActiveBtn{
+    background-color: rgb(226, 226, 226) !important;
+    color: rgb(96, 96, 96) !important;
+} 
+
+.adminPanelInnerMainContainer1GraphContainer{
+    height:500px;
+   width: 100%;
+   background-color: var(--admin-foregroundclr);
+}
+
+.adminPanelInnerMainContainerDoughnutGraphContainer{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: -50px;
+}
+
+.adminPanelInnerMainContainerDoughnutGraphContainer > div{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    row-gap: 20px;
+    padding: 30px 15px;
+    border-radius: 10px;
+    background-color: var(--admin-foregroundclr);
+}
+
+.adminPanelInnerMainContainerDoughnutGraphContainer > div > p{
+    font-size: 2rem;
+    font-weight: 550;
+}

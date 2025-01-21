@@ -1,0 +1,98 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root{
+    --button-color:#F5C113;
+    --background-color:#FAFAFC;
+    --searchbox-bg-color:#FFFFFF;
+    --menubox-bg-color:#FFFFFF;
+    --bold-price-color:#BA704D;
+    --text-color:#2F3438;
+}
+
+body{
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: var(--background-color);
+}
+#main{
+
+}
+
+#navbar{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+}
+
+.innerNavbarBox1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    height: 5vh;
+    position: relative;
+    z-index: 10;
+}
+
+#cartBox > a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+#bar , #cross , #cart{
+    font-size: 3.5rem;
+    cursor: pointer;
+}
+
+#cross{
+    display: none;
+}
+
+.innerNavbarBox2{
+    position: absolute;
+    width: 100vw;
+    height: 95vh;
+    z-index: 10;
+    top: 5vh;
+    background-color: var(--button-color);
+    left: -100vw;
+    transition: all 0.2s;
+
+}
+
+.active{
+    left: 0vw;
+}
+
+#menuItemContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.menuItem{
+    list-style: none;
+    line-height: 3;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    width: 100%;
+    padding-left: 50px;
+    text-decoration: none;
+    position: relative;
+}
+
+.menuItem > li{
+    font-size: 4.5rem;
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
