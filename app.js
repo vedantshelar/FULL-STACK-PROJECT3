@@ -57,3 +57,7 @@ app.get('/landing',(req,res)=>{
 app.get('/admin',(req,res)=>{
     res.render('admin.ejs');
 })
+
+app.get('/admin/pending',(req,res)=>{
+    res.render('pendingOrdersPage.ejs');
+})

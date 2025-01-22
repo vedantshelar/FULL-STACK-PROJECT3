@@ -1,0 +1,183 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+   --admin-navbgclr:#010101;
+   --admin-bgclr:#F8F8F8;
+   --admin-foregroundclr:#FFFFFF;
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+}
+
+#adminPanelPendingOrdersMainContainer{
+    background-color: var(--admin-bgclr);
+    height: 95vh;
+    width: calc(100%-60px);
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    overflow-y: auto;
+}
+#adminPanelPendingOrdersMainContainer > p:nth-child(1){
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+#adminPanelPendingOrdersInnerContainer{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.pendingOrdersBox{
+    background-color: var(--admin-foregroundclr);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    column-gap: 10px;
+}
+
+.pendingOrdersBoxMenuImg{
+width: 20%;
+}
+
+.pendingOrdersBoxMenuImg > img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    position:center center;
+    border-radius: 10px;
+}
+
+.pendingOrdersBoxAllDetails{
+    width: 80%;
+    align-self: flex-start;
+}
+
+.pendingOrdersBoxOrderDetails{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.pendingOrdersBoxOrderDetails > div:nth-child(1){
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(149, 149, 149);
+    padding-bottom: 5px;
+}
+
+.pendingOrdersPageTableNo{
+   background-color:rgb(71, 71, 71);
+   color: white;
+   padding: 5px 10px;
+   border-radius: 5px;
+}
+
+.pendingOrdersBoxOrderDetails > div:nth-child(2){
+    padding: 5px;
+}
+
+.pendingOrdersPageMenuName{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.pendingOrdersBoxOrderDetails > div:nth-child(2) > div{
+   display: flex;
+   flex-direction: row;
+   column-gap: 10px;
+   align-items: center;
+}
+.pendingOrdersBoxOrderDetails > div:nth-child(2) > div > button{
+    width: 100px;
+    background-color: rgba(33, 159, 33, 0.871);
+    /* background-color: rgba(255, 0, 0, 0.871); */
+    color: white;
+    border: none;
+    padding: 2px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.pendingOrdersBoxCustomerDetails{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.pendingOrdersBoxCustomerDetails > div:nth-child(1){
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgb(149, 149, 149);
+    padding-bottom: 5px;
+}
+
+.pendingOrdersBoxCustomerDetails > div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.pendingOrdersBoxCustomerDetails > div:nth-child(2) > p:nth-child(1){
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.pendingOrdersBoxCustomerDetails > div:nth-child(2) > p:nth-child(2){
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.pendingOrdersBoxControls{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    position: relative;
+    height: 30px;
+}
+.pendingOrdersBoxControls > div{
+    align-self: flex-end;
+    position: absolute;
+    right: 0;
+    display: flex;
+    column-gap: 10px;
+}
+
+.pendingOrdersBoxControls > div > button{
+    width: 120px;
+    padding: 5px 0px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.pendingOrdersBoxControls > div > button:nth-child(1){
+background-color: rgba(255, 0, 0, 0.871);
+}
+
+.pendingOrdersBoxControls > div > button:nth-child(2){
+    background-color: rgba(33, 159, 33, 0.871);
+}
+
+.pendingOrdersBoxControls > div > button:nth-child(3){
+    background-color: #F5C113;
+    color: rgb(255, 255, 255);
+}
