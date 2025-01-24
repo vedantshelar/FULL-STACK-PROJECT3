@@ -42,6 +42,10 @@ app.get('/category',(req,res)=>{
     res.render('categoryOptions.ejs');
 })
 
+app.get('/orderStatus',(req,res)=>{
+    res.render('orderStatusPage.ejs')
+})
+
 app.get('/signup',(req,res)=>{
     res.render('signupPage.ejs');
 })
@@ -60,4 +64,16 @@ app.get('/admin',(req,res)=>{
 
 app.get('/admin/pending',(req,res)=>{
     res.render('pendingOrdersPage.ejs');
+})
+
+app.get('/admin/completed',(req,res)=>{
+    res.render('completedOrdersPage.ejs');
+})
+
+app.get('/admin/signin',(req,res)=>{
+    res.render('adminSigninPage.ejs');
+})
+
+app.get('/admin/menu',(req,res)=>{
+    res.render('addMenuFormPage.ejs'); 
 })

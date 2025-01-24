@@ -32,3 +32,14 @@ body{
     background-color: rgba(255, 0, 0, 0.75) !important;
     color: white;
 }
+
+
+.orderPendingStatusBtn{
+    background-color: #F5C113 !important;
+    color: white;
+}
+
+.orderCompleteStatusBtn{
+    background-color: rgba(33, 159, 33, 0.871) !important;
+    color: white;
+}

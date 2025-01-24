@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/pendingOrdersPage.css">
+    <link rel="stylesheet" href="/css/addMenuFormPage.css">
+</head>
+
+<body>
+    <div id="adminMainContainer">
+        <div id="adminNavBarContainer">
+            <div id="adminNavBar">
+                <a class="adminMenus" href="/admin/profile">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <a class="adminMenus" href="/admin">
+                    <i class="fa-solid fa-chart-line"></i>
+                </a>
+                <a class="adminMenus" href="/admin/pending">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </a>
+                <a class="adminMenus" href="/admin/completed">
+                    <i class="fa-solid fa-list-check"></i>
+                </a>
+                <a class="adminMenus" href="/admin/menu">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </a>
+                <a class="adminMenus" href="/admin/report">
+                    <i class="fa-solid fa-square-poll-horizontal"></i>
+                </a>
+            </div>
+        </div>
+        <div id="adminDashboardContainer">
+            <div id="adminDashboarNavContainer">
+                <i class="fa-brands fa-slack"></i>
+                <p>Dashboard</p>
+            </div>
+            <div id="addMenuFormPageMainContainer">
+                <p>Add Menu</p>
+                <form id="addMenuForm">
+                    <div class="addMenuFormControls">
+                        <label for="">Menu Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="addMenuFormTwiceControls">
+                        <div class="addMenuFormControls">
+                            <label for="">Full Front Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
+                            <input type="number" required>
+                        </div>
+                        <div class="addMenuFormControls">
+                            <label for="">Full Back Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
+                            <input type="number" required>
+                        </div>
+                    </div>
+                    <div class="addMenuFormTwiceControls">
+                        <div class="addMenuFormControls">
+                            <label for="">Half Front Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
+                            <input type="number" required>
+                        </div>
+                        <div class="addMenuFormControls">
+                            <label for="">Half Back Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
+                            <input type="number" required>
+                        </div>
+                    </div>
+                    <div class="addMenuFormTriceControls">
+                        <div class="addMenuFormDropDownControls">
+                            <label for="">Category</label>
+                            <select name="" id="category">
+                                <option value="">Rice</option>
+                                <option value="">Noodle</option>
+                                <option value="">Pizza</option>
+                                <option value="">Burger</option>
+                                <option value="">Drink</option>
+                            </select>
+                        </div>
+                        <div class="addMenuFormDropDownControls">
+                            <label for="">Type</label>
+                            <select name="" id="type">
+                                <option value="">Veg</option>
+                                <option value="">Non-Veg</option>
+                            </select>
+                        </div>
+                        <div class="addMenuFormDropDownControls">
+                            <label for="">Is Best Selling</label>
+                            <select name="" id="isBestSelling">
+                                <option value="">Yes</option>
+                                <option value="" selected>No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="addMenuFormTextAreaControls">
+                        <label for="">Description</label>
+                        <textarea name="" id="description" required></textarea>
+                    </div>
+                    <div class="addMenuFormTextAreaControls">
+                        <label for="">Ingredients</label>
+                        <textarea name="" id="ingredients" required></textarea>
+                    </div>
+                    <div class="addMenuFormUploadImgCotrols">
+                        <label for="">Select Menu Imgae</label>
+                        <input type="file" name="" id="menuImg" required>
+                    </div>
+                    <div class="addMenuFormBtnControls">
+                        <button type="submit" id="addMEnuFormSubmitBtn">Add a Menu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/7e49fc305e.js" crossorigin="anonymous"></script>
+    <script src="/js/pendingOrdersPage.js"></script>
+</body>
+
+</html>

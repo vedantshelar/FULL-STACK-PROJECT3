@@ -1,0 +1,113 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root{
+    --button-color:#F5C113;
+    --background-color:#FAFAFC;
+    --searchbox-bg-color:#FFFFFF;
+    --menubox-bg-color:#FFFFFF;
+    --bold-price-color:#BA704D;
+    --text-color:#2F3438;
+}
+
+body{
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: var(--background-color);
+}
+
+#adminSigninPageMainContainer{
+    border: 1px solid black;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--text-color);
+}
+
+#adminSigninPageMainInnerContainer{
+ border: 1px solid black;
+ width: 90%;
+ height: 90%;
+ border-radius: 30px;
+ background-color: var(--background-color);
+ display: flex;
+flex-direction: row;
+}
+
+#adminSigninPageImgContainer{
+    width: 50%;
+    height: 100%;
+}
+
+#adminSigninPageImgContainer > img{
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+#adminSigninPageFormContainer{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#adminSigninForm{
+    height: 60%;
+    width: 90%;
+}
+ 
+#adminSigninForm > p:nth-child(1){
+    font-size: 3rem;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.adminFormControls{
+display: flex;
+flex-direction: column;
+font-size: 1.2rem;
+row-gap: 5px;
+margin-bottom: 15px;
+width: 100%;
+}
+
+.adminFormControls > input{
+ padding: 15px 10px;
+ outline:none;
+ border-radius: 5px;
+ border: 1px solid rgba(0, 0, 0, 0.779);
+ color: var(--text-color);
+ width: 90%;
+}
+
+.adminForgetPasswordformControls{
+    width: 90%;
+    display: flex;
+    text-align: end; 
+    position: relative;
+    height: 30px;
+}
+
+.adminForgetPasswordformControls > a{
+    color: var(--text-color);
+    position: absolute;
+    right: 0;
+}
+.adminSigninBtn{
+    padding: 15px;
+    width: 90%;
+    font-size: 1.2rem;
+    background-color: var(--text-color);
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
