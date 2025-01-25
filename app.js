@@ -70,8 +70,16 @@ app.get('/admin/completed',(req,res)=>{
     res.render('completedOrdersPage.ejs');
 })
 
+app.get('/admin/landing',(req,res)=>{
+    res.render('adminLandingPage.ejs');
+})
+
 app.get('/admin/signin',(req,res)=>{
     res.render('adminSigninPage.ejs');
+})
+
+app.get('/admin/signup',(req,res)=>{
+    res.render('adminSignupPage.ejs');
 })
 
 app.get('/admin/menu',(req,res)=>{

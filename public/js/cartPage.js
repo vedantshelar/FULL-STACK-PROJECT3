@@ -3,7 +3,8 @@ let itemCount = cartPaneMainContainer.childElementCount;
 let arrCount = [];
 for (let i = 0; i < itemCount; i++) {
     arrCount.push(1);
-} 
+}
+determinePrice();
 
 cartPaneMainContainer.addEventListener('click', function (event) {
     let currElement = event.target;
@@ -31,6 +32,7 @@ cartPaneMainContainer.addEventListener('click', function (event) {
     }
     updateTotalItemPrice();
 })
+
 function incrementItemPrice(currPrice, counter) {
     return currPrice * counter;
 }
@@ -50,3 +52,41 @@ function updateTotalItemPrice() {
     totalItemPrice.innerHTML = `Total : <i class="fa-solid fa-indian-rupee-sign"></i><span>${tempTotalItemPrice}</span>`;
 }
 
+// full and half price selection 
+
+function determinePrice() {
+    let price = 0;
+    let cartPageFUllPrices = document.querySelectorAll('.cartPageFUllPrice');
+    let cartPageHalfPrices = document.querySelectorAll('.cartPageHalfPrice');
+    for (cartPageFUllPrice of cartPageFUllPrices) {
+        if (cartPageFUllPrice.checked) {
+            cartPageFUllPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').setAttribute('itemPrice', cartPageFUllPrice.value);
+            //manage price with respect to menu quantity
+            let qnty = parseInt(cartPageFUllPrice.parentNode.parentNode.parentNode.querySelector('.qnty').getAttribute('qnty'));
+            cartPageFUllPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').innerText = (cartPageFUllPrice.value * qnty);
+        }
+    }
+    for (cartPageHalfPrice of cartPageHalfPrices) {
+        if (cartPageHalfPrice.checked) {
+            cartPageHalfPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').setAttribute('itemPrice', cartPageHalfPrice.value);
+            //manage price with respect to menu quantity
+            let qnty = parseInt(cartPageHalfPrice.parentNode.parentNode.parentNode.querySelector('.qnty').getAttribute('qnty'));
+            cartPageHalfPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').innerText = (cartPageHalfPrice.value * qnty);
+        }
+    }
+}
+
+let cartPageFUllPrices = document.querySelectorAll('.cartPageFUllPrice');
+let cartPageHalfPrices = document.querySelectorAll('.cartPageHalfPrice');
+
+for (cartPageFUllPrice of cartPageFUllPrices) {
+    cartPageFUllPrice.addEventListener('click', (event) => {
+        determinePrice()
+    })
+}
+
+for (cartPageHalfPrice of cartPageHalfPrices) {
+    cartPageHalfPrice.addEventListener('click', (event) => {
+        determinePrice()
+    })
+}

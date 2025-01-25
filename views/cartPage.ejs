@@ -7,17 +7,27 @@
         </div>
         <!-- <%- include('./includes/searchbar.ejs') %> -->
         <div id="categoryMenuListMainContainer" class="cartPaneMainContainer">
-            <div class="categoryMenuListBox cartPageMenuListBox" itemNo="0">
+            <div class="categoryMenuListBox cartPageMenuListBox " itemNo="0">
                 <a class="categoryMenuListInnerBox1" href="12">
                     <img src="/assets/corn.jpg" alt="">
                 </a>
                 <div class="categoryMenuListInnerBox2">
                     <a class="categoryMenuListBoxMenuInfo" href="12">
-                        <p class="categoryMenuListBoxMenuTitle">Corn Plate</p>
+                        <p class="categoryMenuListBoxMenuTitle">Corn Plate <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
                         <p class="categoryMenuListBoxMenuDescription">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
                         </p>
                     </a>
+                    <div class="cartPagePriceContainer">
+                        <div>
+                            <input type="radio" name="price0" value="150" class="cartPageFUllPrice" checked>
+                            <span>150/Full</span>
+                        </div> 
+                        <div>
+                            <input type="radio" name="price0" value="80" class="cartPageHalfPrice">
+                            <span>80/Half</span>
+                        </div>
+                    </div>
                     <div class="cartPageCookingRequestBox"> 
                         <input type="text" name="cookingRequest" placeholder="cooking request if any">
                     </div>
@@ -41,11 +51,21 @@
                 </a>
                 <div class="categoryMenuListInnerBox2">
                     <a class="categoryMenuListBoxMenuInfo" href="12">
-                        <p class="categoryMenuListBoxMenuTitle">Fry Paneer</p>
+                        <p class="categoryMenuListBoxMenuTitle">Fry Paneer <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
                         <p class="categoryMenuListBoxMenuDescription">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
                         </p>
                     </a>
+                    <div class="cartPagePriceContainer">
+                        <div>
+                            <input type="radio" name="price1" value="250" class="cartPageFUllPrice" checked>
+                            <span>250/Full</span>
+                        </div>
+                        <div>
+                            <input type="radio" name="price1" value="100" class="cartPageHalfPrice">
+                            <span>100/Half</span>
+                        </div>
+                    </div>
                     <div class="cartPageCookingRequestBox"> 
                         <input type="text" name="cookingRequest" placeholder="cooking request if any">
                     </div>
@@ -69,11 +89,21 @@
                 </a>
                 <div class="categoryMenuListInnerBox2">
                     <a class="categoryMenuListBoxMenuInfo" href="12">
-                        <p class="categoryMenuListBoxMenuTitle">Dal</p>
+                        <p class="categoryMenuListBoxMenuTitle">Dal <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
                         <p class="categoryMenuListBoxMenuDescription">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
                         </p>
                     </a>
+                    <div class="cartPagePriceContainer">
+                        <div>
+                            <input type="radio" name="price2" value="50" class="cartPageFUllPrice" checked>
+                            <span>50/Full</span>
+                        </div>
+                        <div>
+                            <input type="radio" name="price2" value="25" class="cartPageHalfPrice">
+                            <span>25/Half</span>
+                        </div>
+                    </div>
                     <div class="cartPageCookingRequestBox"> 
                         <input type="text" name="cookingRequest" placeholder="cooking request if any">
                     </div>
