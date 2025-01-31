@@ -3,6 +3,7 @@ let popularSectionMainContainer = document.querySelector('#popularSectionMainCon
 popularSectionMainContainer.addEventListener('click',(event)=>{
     if(event.target.className.includes("fa-solid")){
         let addToCartBtn = event.target;
+        let menuId = addToCartBtn.getAttribute('menuId');//menu id to be added to session and vice versa 
         if(event.target.className.includes("fa-plus")){
             addToCartBtn.classList.remove('fa-plus');
             addToCartBtn.classList.add('fa-minus');

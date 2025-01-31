@@ -1,0 +1,169 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --admin-navbgclr: #010101;
+    --admin-bgclr: #F8F8F8;
+    --admin-foregroundclr: #FFFFFF;
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#adminEditMenuFormPageMainContainer {
+    background-color: var(--admin-bgclr);
+    height: 95vh;
+    width: calc(100%-60px);
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    overflow-y: auto;
+}
+
+#adminEditMenuFormPageMainContainer>p:nth-child(1) {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+#adminEditMenuFormFilterContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.505);
+    padding-bottom: 20px;
+}
+
+#adminEditMenuFormFilterContainer>div:nth-child(1) {
+    width: 100%;
+}
+
+#search {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 10px 10px;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.509);
+}
+
+#adminEditMenuFormFilterContainer>div:nth-child(2) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#adminEditMenuFormFilterContainer>div:nth-child(2)>div:nth-child(1) {
+    align-self: flex-end;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.dropdownControls {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.dropdownControls>label {
+    font-size: 1.3rem;
+}
+
+.dropdownControls>select {
+    font-size: 1.1rem;
+    width: 250px;
+}
+
+#adminEditMenuFormPageMenuContainer {
+    display: flex;
+    flex-direction: row;
+    row-gap: 20px;
+    background-color: var(--admin-bgclr);
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.editMenuBox {
+    background-color: var(--admin-foregroundclr);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    width: 49%;
+    column-gap: 10px;
+    height: 150px;
+}
+
+
+.editMenuBoxImgContainer {
+    width: 25%;
+    height: 100%;
+}
+
+.editMenuBoxImgContainer>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: center center;
+    border-radius: 10px;
+}
+
+.editMenuBoxInfoContainer {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    padding-left: 5px;
+    row-gap: 5px;
+    position: relative;
+}
+
+.editMenuBoxInfoContainer>div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.menuTitleContainer>p {
+    font-size: 1.5rem;
+}
+
+.menuTitlePriceContainer {
+    column-gap: 5px;
+}
+
+.menuTitlePriceContainer>span {
+    font-size: 1.2rem;
+    color: rgb(61, 61, 61);
+}
+
+.editMenuBtnContainer {
+    position: absolute;
+    bottom: 0;
+}
+
+.editMenuEditBtn {
+    align-self: flex-end;
+    text-decoration: none;
+    position: absolute;
+    right: 0;
+    background-color: rgba(33, 159, 33, 0.871);
+    color: white;
+    padding: 10px 20px;
+    border-bottom-right-radius: 10px;
+}

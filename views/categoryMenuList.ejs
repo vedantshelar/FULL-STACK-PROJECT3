@@ -7,70 +7,33 @@
         </div>
         <%- include('./includes/searchbar.ejs') %>
             <div id="categoryMenuListMainContainer">
-                <div class="categoryMenuListBox">
-                    <a class="categoryMenuListInnerBox1" href="12">
-                        <img src="https://cdn.grofers.com/assets/search/usecase/banner/sweet_corn_pizza_01.png" alt="">
-                    </a>
-                    <div class="categoryMenuListInnerBox2">
-                        <a class="categoryMenuListBoxMenuInfo" href="12">
-                            <p class="categoryMenuListBoxMenuTitle">Corn Pizza <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
-                            <p class="categoryMenuListBoxMenuDescription">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
-                            </p>
-                        </a> 
-                        <div class="categoryMenuListBoxMenuPriceSection">
-                            <div>
-                                <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                            </div>
-                            <div>
-                                <button><i class="fa-solid fa-plus" cart="removed"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="categoryMenuListBox">
-                    <a class="categoryMenuListInnerBox1" href="12">
-                        <img src="https://www.sustainablecooks.com/wp-content/uploads/2022/12/FS-Onion-Pizza-3-scaled.jpg" alt="">
-                    </a>
-                    <div class="categoryMenuListInnerBox2">
-                        <a class="categoryMenuListBoxMenuInfo" href="12">
-                            <p class="categoryMenuListBoxMenuTitle">Onion Pizza <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
-                            <p class="categoryMenuListBoxMenuDescription">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
-                            </p>
-                        </a> 
-                        <div class="categoryMenuListBoxMenuPriceSection">
-                            <div>
-                                <i class="fa-solid fa-indian-rupee-sign"></i><span>99</span>
-                            </div>
-                            <div>
-                                <button><i class="fa-solid fa-plus" cart="removed"></i></button>
+                <%if(menus.length>0){%>
+                    <%for(menu of menus) {%>
+                        <div class="categoryMenuListBox">
+                            <a class="categoryMenuListInnerBox1" href="/user/menu/<%=menu._id%>">
+                                <img src="<%=menu.menuImg%>" alt="">
+                            </a>
+                            <div class="categoryMenuListInnerBox2">
+                                <a class="categoryMenuListBoxMenuInfo" href="/user/menu/<%=menu._id%>">
+                                    <p class="categoryMenuListBoxMenuTitle"><%=menu.menuName%> <%if(menu.type=='veg'){%>
+                                         <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"><%}else if(menu.type=='nonVeg'){%><img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"><%}%></p>
+                                    <p class="categoryMenuListBoxMenuDescription">
+                                        <%=menu.description.slice(0,100)%>....
+                                    </p>
+                                </a> 
+                                <div class="categoryMenuListBoxMenuPriceSection">
+                                    <div>
+                                        <i class="fa-solid fa-indian-rupee-sign"></i><span><%=menu.fullFrontPrice%>/F</span>
+                                    </div>
+                                    <div>
+                                        <button><i class="fa-solid fa-plus" cart="removed" ></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="categoryMenuListBox">
-                    <a class="categoryMenuListInnerBox1" href="12">
-                        <img src="https://preppykitchen.com/wp-content/uploads/2018/08/Tomato-Pizza-1200x1200px-preppy-square.jpg" alt="">
-                    </a>
-                    <div class="categoryMenuListInnerBox2">
-                        <a class="categoryMenuListBoxMenuInfo" href="12">
-                            <p class="categoryMenuListBoxMenuTitle">Tomato Pizza <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
-                            <p class="categoryMenuListBoxMenuDescription">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nulla adipisci....
-                            </p>
-                        </a> 
-                        <div class="categoryMenuListBoxMenuPriceSection">
-                            <div>
-                                <i class="fa-solid fa-indian-rupee-sign"></i><span>300</span>
-                            </div>
-                            <div>
-                                <button><i class="fa-solid fa-plus" cart="removed"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <%}%>
+                <%}else {%>
+                    <h1 style="font-size: 2rem;">No Menu Available Of This Category</h1>
+                    <%}%>
             </div>
     </body> 

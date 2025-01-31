@@ -1,10 +1,16 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 const engine = require('ejs-mate');
 const PORT = 3000;
 app.listen(PORT,()=>{
     console.log("server is listening on port number "+PORT);
-})
+});
+
+//routes
+
+const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 //built in middlewares 
 
@@ -14,74 +20,22 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-    res.render('home.ejs')
-});
+//fucntion to connnect to database
 
-app.get('/category/pizza',(req,res)=>{
-    res.render('categoryMenuList.ejs');
+async function main() {
+  await mongoose.connect('mongodb://127.0.0.1:27017/RESTAURANT');
+}
+
+main().then(()=>{
+    console.log('connected to RESTAURANT Database');
 })
+.catch(err => console.log(err));
 
-app.get('/menu/fryRice',(req,res)=>{
-    res.render('individualMenuPage.ejs');
-})
+//routes
+app.use('/user',userRoutes);
+app.use('/admin',adminRoutes);
 
-app.get('/cart',(req,res)=>{
-    res.render('cartPage.ejs')
-})
-
-app.get('/orderHistory',(req,res)=>{
-    res.render('orderHistoryPage.ejs'); 
-})
-
-app.get('/bestSelling',(req,res)=>{
-    res.render('bestSellingPage.ejs');
-})
-
-app.get('/category',(req,res)=>{
-    res.render('categoryOptions.ejs');
-})
-
-app.get('/orderStatus',(req,res)=>{
-    res.render('orderStatusPage.ejs')
-})
-
-app.get('/signup',(req,res)=>{
-    res.render('signupPage.ejs');
-})
-
-app.get('/signin',(req,res)=>{
-    res.render('signinPage.ejs');
-})
-
-app.get('/landing',(req,res)=>{
-    res.render('landingPage.ejs');
-})
-
-app.get('/admin',(req,res)=>{
-    res.render('admin.ejs');
-})
-
-app.get('/admin/pending',(req,res)=>{
-    res.render('pendingOrdersPage.ejs');
-})
-
-app.get('/admin/completed',(req,res)=>{
-    res.render('completedOrdersPage.ejs');
-})
-
-app.get('/admin/landing',(req,res)=>{
-    res.render('adminLandingPage.ejs');
-})
-
-app.get('/admin/signin',(req,res)=>{
-    res.render('adminSigninPage.ejs');
-})
-
-app.get('/admin/signup',(req,res)=>{
-    res.render('adminSignupPage.ejs');
-})
-
-app.get('/admin/menu',(req,res)=>{
-    res.render('addMenuFormPage.ejs'); 
+app.use((err,req,res,next)=>{
+    console.log(err);
+    res.send('some error occured');
 })

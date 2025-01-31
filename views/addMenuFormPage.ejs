@@ -29,8 +29,8 @@
                 <a class="adminMenus" href="/admin/menu">
                     <i class="fa-solid fa-circle-plus"></i>
                 </a>
-                <a class="adminMenus" href="/admin/report">
-                    <i class="fa-solid fa-square-poll-horizontal"></i>
+                <a class="adminMenus" href="/admin/menu/edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
                 </a>
             </div>
         </div>
@@ -41,68 +41,69 @@
             </div>
             <div id="addMenuFormPageMainContainer">
                 <p>Add Menu</p>
-                <form id="addMenuForm">
+                <form id="addMenuForm" action="/admin/menu" method="post" enctype="multipart/form-data">
                     <div class="addMenuFormControls">
                         <label for="">Menu Name</label>
-                        <input type="text" required>
+                        <input type="text" name="menuName" required>
                     </div>
                     <div class="addMenuFormTwiceControls">
                         <div class="addMenuFormControls">
                             <label for="">Full Front Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
-                            <input type="number" required>
+                            <input type="number" name="fullFrontPrice" required>
                         </div>
                         <div class="addMenuFormControls">
                             <label for="">Full Back Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
-                            <input type="number" required>
+                            <input type="number" name="fullBackPrice" required>
                         </div>
                     </div>
                     <div class="addMenuFormTwiceControls">
                         <div class="addMenuFormControls">
                             <label for="">Half Front Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
-                            <input type="number" required>
+                            <input type="number" name="halfFrontPrice" required>
                         </div>
                         <div class="addMenuFormControls">
                             <label for="">Half Back Price ( <i class="fa-solid fa-indian-rupee-sign"></i> )</label>
-                            <input type="number" required>
+                            <input type="number" name="halfBackPrice" required>
                         </div>
                     </div>
                     <div class="addMenuFormTriceControls">
                         <div class="addMenuFormDropDownControls">
                             <label for="">Category</label>
-                            <select name="" id="category">
-                                <option value="">Rice</option>
-                                <option value="">Noodle</option>
-                                <option value="">Pizza</option>
-                                <option value="">Burger</option>
-                                <option value="">Drink</option>
+                            <select name="category" id="category">
+                                <option value="rice">Rice</option>
+                                <option value="noodle">Noodle</option>
+                                <option value="pizza">Pizza</option>
+                                <option value="burger">Burger</option>
+                                <option value="drink">Drink</option>
+                                <option value="sandwich">Sandwich</option>
                             </select>
                         </div>
                         <div class="addMenuFormDropDownControls">
                             <label for="">Type</label>
-                            <select name="" id="type">
-                                <option value="">Veg</option>
-                                <option value="">Non-Veg</option>
+                            <select name="type" id="type">
+                                <option value="veg">Veg</option>
+                                <option value="nonVeg">Non-Veg</option>
                             </select>
                         </div>
                         <div class="addMenuFormDropDownControls">
                             <label for="">Is Best Selling</label>
-                            <select name="" id="isBestSelling">
-                                <option value="">Yes</option>
-                                <option value="" selected>No</option>
+                            <select name="isBestSelling" id="isBestSelling">
+                                <option value="true">Yes</option>
+                                <option value="false" selected>No</option>
                             </select>
                         </div>
                     </div>
                     <div class="addMenuFormTextAreaControls">
                         <label for="">Description</label>
-                        <textarea name="" id="description" required></textarea>
+                        <textarea name="description" id="description" required></textarea>
                     </div>
                     <div class="addMenuFormTextAreaControls">
                         <label for="">Ingredients</label>
-                        <textarea name="" id="ingredients" required></textarea>
+                        <textarea name="ingredient" id="ingredients" required></textarea>
                     </div>
                     <div class="addMenuFormUploadImgCotrols">
                         <label for="">Select Menu Imgae</label>
-                        <input type="file" name="" id="menuImg" required>
+                        <input type="file" name="menuImg" id="menuImg" required>
                     </div>
                     <div class="addMenuFormBtnControls">
                         <button type="submit" id="addMEnuFormSubmitBtn">Add a Menu</button>

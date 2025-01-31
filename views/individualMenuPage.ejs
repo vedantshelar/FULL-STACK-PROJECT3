@@ -1,31 +1,32 @@
 <% layout('./boilerplates/layout') %>
 <body>
     <div id="individualMenuPageMainContainer">
-        <a href="" id="individualMenuPageMainContainerBackBtn"><i class="fa-solid fa-square-caret-left" style="color: #ffffff;"></i></a>
+        <a href="/user" id="individualMenuPageMainContainerBackBtn"><i class="fa-solid fa-square-caret-left" style="color: #ffffff;"></i></a>
         <div id="individualMenuPageMenuImg">
-            <img src="/assets/paneer.jpg" alt="menuImg">
+            <img src="<%=menu.menuImg%>" alt="menuImg">
         </div>
         <div id="individualMenuPageTitleAndPriceContainer">
-            <p>Corn Dish</p>
-            <p><i class="fa-solid fa-indian-rupee-sign"></i>250</p>
+            <p><%=menu.menuName.charAt(0).toUpperCase()%><%=menu.menuName.slice(1)%></p>
+            <div>
+                <p><i class="fa-solid fa-indian-rupee-sign"></i><%=menu.fullFrontPrice%>/F ,</p><p><i class="fa-solid fa-indian-rupee-sign"></i><%=menu.halfFrontPrice%>/H</p>
+            </div>
         </div>
         <div id="individualMenuPageDetailsAndIngredientsContainer">
             <div>
-                <span id="DetailsBtn">Details</span>
-                <span id="IngredientsBtn">Ingredients</span>
+                <span id="DetailsBtn">Description</span>
+                <span id="IngredientsBtn">Ingregients</span>
             </div>
             <div>
                 <p id="DetailsContent">
-                    Detail info , sit amet consectetur adipisicing elit. Quae ullam ea labore itaque tempore natus obcaecati nostrum molestias sapiente, fugit accusantium. Magnam iusto eum debitis similique itaque quam repellat dolorem in, molestias ea ut nesciunt quidem tempora enim expedita placeat pariatur asperiores.
+                    <%=menu.description%>
                 </p> 
                 <p id="IngredientsContent">
-                    Ingredient Info dolor, sit amet consectetur adipisicing elit. Quae ullam ea labore itaque tempore natus obcaecati nostrum molestias sapiente, fugit accusantium. Magnam iusto eum debitis similique itaque quam repellat dolorem in, molestias ea ut nesciunt quidem tempora enim expedita placeat pariat
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt accusantium animi omnis repellat totam nulla impedit eveniet ipsum hic numquam. Officia voluptates neque minima commodi? Fugit consequatur unde atque sit.
+                    <%=menu.ingredient%>
                 </p> 
             </div>
         </div>
         <div id="individualMenuPageAddToCartContainer">
-            <button id="individualMenuPageAddToCartContainerAddToCartBtn" cart="removed">Add to cart</button>
+            <button id="individualMenuPageAddToCartContainerAddToCartBtn" cart="removed" menuId="<%=menu._id%>">Add to cart</button>
         </div>
     </div>
 </body>

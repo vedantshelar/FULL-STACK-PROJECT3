@@ -27,12 +27,15 @@ IngredientsBtn.addEventListener('click',()=>{
 // toggle add to cart button feature
 
 individualMenuPageAddToCartContainerAddToCartBtn.addEventListener('click',()=>{
+    let menuId = individualMenuPageAddToCartContainerAddToCartBtn.getAttribute('menuId');
     let currCartStatus = individualMenuPageAddToCartContainerAddToCartBtn.getAttribute('cart');
     if(currCartStatus==='removed'){
+        console.log(menuId)
         individualMenuPageAddToCartContainerAddToCartBtn.setAttribute('cart','added');
         individualMenuPageAddToCartContainerAddToCartBtn.innerText='Remove from cart';
         alert('menu added to cart');
     }else if(currCartStatus==='added'){
+        console.log(menuId)
         individualMenuPageAddToCartContainerAddToCartBtn.setAttribute('cart','removed');
         individualMenuPageAddToCartContainerAddToCartBtn.innerText='Add to cart';
         alert('menu removed from cart');

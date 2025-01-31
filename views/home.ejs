@@ -9,7 +9,7 @@
         <div id="categorySection">
             <p class="subHeading">Category</p>
             <div>
-                <a href="/category/pizza" class="categoryBox">
+                <a href="/user/category/pizza" class="categoryBox">
                     <div>
                         <img src="/assets/pizza.png" alt="">
                     </div>
@@ -18,7 +18,7 @@
                     </div>
                 </a> 
 
-                <a href="12" class="categoryBox">
+                <a href="/user/category/burger" class="categoryBox">
                     <div>
                         <img src="/assets/burger.png" alt="">
                     </div>
@@ -27,7 +27,7 @@
                     </div>
                 </a>
 
-                <a href="12" class="categoryBox">
+                <a href="/user/category/sandwich" class="categoryBox">
                     <div>
                         <img src="/assets/sandwichh.png" alt="">
                     </div>
@@ -36,7 +36,7 @@
                     </div>
                 </a>
 
-                <a href="12" class="categoryBox">
+                <a href="/user/category/drink" class="categoryBox">
                     <div>
                         <img src="/assets/drink.png" alt="">
                     </div>
@@ -45,39 +45,21 @@
                     </div>
                 </a>
 
-                <a href="12" class="categoryBox">
+                <a href="/user/category/rice" class="categoryBox">
                     <div>
                         <img src="/assets/pizza.png" alt="">
                     </div>
                     <div>
-                        <p>Pizza</p>
+                        <p>Rice</p>
                     </div>
                 </a> 
 
-                <a href="12" class="categoryBox">
+                <a href="/user/category/noodle" class="categoryBox">
                     <div>
                         <img src="/assets/burger.png" alt="">
                     </div>
                     <div>
-                        <p>Burger</p>
-                    </div>
-                </a>
-
-                <a href="12" class="categoryBox">
-                    <div>
-                        <img src="/assets/sandwichh.png" alt="">
-                    </div>
-                    <div>
-                        <p>sandwich</p>
-                    </div>
-                </a>
-
-                <a href="12" class="categoryBox">
-                    <div>
-                        <img src="/assets/drink.png" alt="">
-                    </div>
-                    <div>
-                        <p>Drink</p>
+                        <p>Noodle</p>
                     </div>
                 </a>
             </div>
@@ -85,116 +67,34 @@
         <div id="popularSection">
             <p class="subHeading">Best Selling</p>
             <div id="popularSectionMainContainer">
-                <div class="popularSectionMenuItemBox">
-                    <a href="/menu/fryRice">
-                        <div class="likeSection">
-                            <i class="fa-solid fa-heart" style="color: #ff0033;"></i>
-                            <span>34</span>
+                <% if(menus.length>0){%>
+                    <% for(menu of menus){%>
+                        <div class="popularSectionMenuItemBox">
+                            <a href="/user/menu/<%=menu._id%>">
+                                <div class="likeSection">
+                                    <i class="fa-solid fa-heart" style="color: #ff0033;"></i>
+                                    <span>34</span>
+                                </div>
+                                <div class="imageSection">
+                                    <img src="<%=menu.menuImg%>" alt="img">
+                                </div>
+                                <div class="itemDescriptionSection">
+                                    <p><%=menu.menuName.toUpperCase().slice(0,12)%>...</p>
+                                </div>
+                            </a>
+                            <div class="priceSection">
+                                <span class="addToCartBtn">
+                                    <i class="fa-solid fa-plus" cart="removed"  menuId="<%=menu._id%>"></i>
+                                </span>
+                                <span>
+                                    <i class="fa-solid fa-indian-rupee-sign"></i><span><%=menu.fullFrontPrice%></span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="imageSection">
-                            <img src="/assets/paneer.jpg" alt="img">
-                        </div>
-                        <div class="itemDescriptionSection">
-                            <p>Fry Paneer</p>
-                        </div>
-                    </a>
-                    <div class="priceSection">
-                        <span class="addToCartBtn">
-                            <i class="fa-solid fa-plus" cart="removed"></i>
-                        </span>
-                        <span>
-                            <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="popularSectionMenuItemBox">
-                    <a href="#">
-                        <div class="likeSection">
-                            <i class="fa-solid fa-heart" style="color: #ff0033;"></i>
-                            <span>34</span>
-                        </div>
-                        <div class="imageSection">
-                            <img src="/assets/corn.jpg" alt="img">
-                        </div>
-                        <div class="itemDescriptionSection">
-                            <p>Fry Paneer</p>
-                        </div>
-                    </a>
-                    <div class="priceSection">
-                        <span class="addToCartBtn">
-                            <i class="fa-solid fa-plus" cart="removed"></i>
-                        </span>
-                        <span>
-                            <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="popularSectionMenuItemBox">
-                    <a href="#">
-                        <div class="likeSection">
-                            <i class="fa-solid fa-heart" style="color: #ff0033;"></i>
-                            <span>34</span>
-                        </div>
-                        <div class="imageSection">
-                            <img src="/assets/dal.jpg" alt="img">
-                        </div>
-                        <div class="itemDescriptionSection">
-                            <p>Fry Paneer</p>
-                        </div>
-                    </a>
-                    <div class="priceSection">
-                        <span class="addToCartBtn">
-                            <i class="fa-solid fa-plus" cart="removed"></i>
-                        </span>
-                        <span>
-                            <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="popularSectionMenuItemBox">
-                    <a href="#">
-                        <div class="likeSection">
-                            <i class="fa-solid fa-heart" style="color: #ff0033;"></i>
-                            <span>34</span>
-                        </div>
-                        <div class="imageSection">
-                            <img src="/assets/paneer.jpg" alt="img">
-                        </div>
-                        <div class="itemDescriptionSection">
-                            <p>Fry Paneer</p>
-                        </div>
-                    </a>
-                    <div class="priceSection">
-                        <span class="addToCartBtn">
-                            <i class="fa-solid fa-plus" cart="removed"></i>
-                        </span>
-                        <span>
-                            <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="popularSectionMenuItemBox">
-                    <a href="#">
-                        <div class="likeSection">
-                            <i class="fa-solid fa-heart" style="color: #ff0033;"></i>
-                            <span>34</span>
-                        </div>
-                        <div class="imageSection">
-                            <img src="/assets/paneer.jpg" alt="img">
-                        </div>
-                        <div class="itemDescriptionSection">
-                            <p>Fry Paneer</p>
-                        </div>
-                    </a>
-                    <div class="priceSection">
-                        <span class="addToCartBtn">
-                            <i class="fa-solid fa-plus" cart="removed"></i>
-                        </span>
-                        <span>
-                            <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+                    <%}%>
+                <%}else { %>
+                    <p>NO BEST SELLING MENU'S AVAILABLE</p>
+                    <%}%>
+            </div> 
         </div>
     </body> 
