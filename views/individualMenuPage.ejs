@@ -1,7 +1,7 @@
 <% layout('./boilerplates/layout') %>
-<body>
+<body onload="loadIndividualMenuCartInfo()">
     <div id="individualMenuPageMainContainer">
-        <a href="/user" id="individualMenuPageMainContainerBackBtn"><i class="fa-solid fa-square-caret-left" style="color: #ffffff;"></i></a>
+        <a href="/user/101" id="individualMenuPageMainContainerBackBtn"><i class="fa-solid fa-square-caret-left" style="color: #ffffff;"></i></a>
         <div id="individualMenuPageMenuImg">
             <img src="<%=menu.menuImg%>" alt="menuImg">
         </div>

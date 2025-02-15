@@ -15,24 +15,24 @@
             <img src="/assets/adminSignupPageBgImg.jpg" alt="image">
         </div>
         <div id="adminSigninPageFormContainer">
-            <form id="adminSigninForm" action="/admin/">
+            <form id="adminSigninForm" action="/admin/signup" method="post">
                 <p>Sign up</p>
                 <div class="adminFormControls">
                     <label for="">Email address</label>
-                    <input type="email" placeholder="Enter your email">
+                    <input type="email" name="email" placeholder="Enter your email">
                 </div>
                 <div class="adminFormControls">
                     <label for="">Mobile number</label>
-                    <input type="number" placeholder="Enter your number">
+                    <input type="number" name="mobileNumber" placeholder="Enter your number">
                 </div>
                 <div class="adminFormControls">
                     <label for="">Password</label>
-                    <input type="password" placeholder="Enter your password">
+                    <input type="password" name="password" placeholder="Enter your password">
                 </div>
                 <div class="adminForgetPasswordformControls">
                     <a href="#">Forget Password</a>
                 </div>
-                <button class="adminSigninBtn" type="submit">Sign in</button>
+                <button class="adminSigninBtn" type="submit">Sign Up</button>
             </form>
         </div>
     </div>

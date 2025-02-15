@@ -1,6 +1,6 @@
 <% layout('./boilerplates/layout') %>
 
-    <body>
+    <body onload="loadCategoryMenuListCartInfo()">
         <div id="heroSection">
             <p>Explore</p>
             <p>Pizza Menu's</p>
@@ -26,7 +26,7 @@
                                         <i class="fa-solid fa-indian-rupee-sign"></i><span><%=menu.fullFrontPrice%>/F</span>
                                     </div>
                                     <div>
-                                        <button><i class="fa-solid fa-plus" cart="removed" ></i></button>
+                                        <button><i class="fa-solid fa-plus cartStatus" cart="removed" menuId="<%=menu._id%>"></i></button>
                                     </div>
                                 </div>
                             </div>

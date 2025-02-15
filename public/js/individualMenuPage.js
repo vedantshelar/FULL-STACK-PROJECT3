@@ -1,10 +1,25 @@
+//loading all cart info in body 
+let individualMenuPageAddToCartContainerAddToCartBtn = document.querySelector('#individualMenuPageAddToCartContainerAddToCartBtn');
+function loadIndividualMenuCartInfo(){
+    if(localStorage.getItem("cartInfo")){
+        const cartInfo = JSON.parse(localStorage.getItem("cartInfo"));
+        let menuId = individualMenuPageAddToCartContainerAddToCartBtn.getAttribute('menuId');
+        if(cartInfo.includes(menuId)){
+            individualMenuPageAddToCartContainerAddToCartBtn.setAttribute('cart','added');
+            individualMenuPageAddToCartContainerAddToCartBtn.innerText='Remove from cart';
+        }else{
+            individualMenuPageAddToCartContainerAddToCartBtn.setAttribute('cart','removed');
+            individualMenuPageAddToCartContainerAddToCartBtn.innerText='Add to cart';
+        }
+    }
+}
+
 // toggle detail and ingredients feature 
 
 let DetailsBtn = document.querySelector('#DetailsBtn');
 let IngredientsBtn = document.querySelector('#IngredientsBtn');
 let DetailsContent = document.querySelector('#DetailsContent');
 let IngredientsContent = document.querySelector('#IngredientsContent');
-let individualMenuPageAddToCartContainerAddToCartBtn = document.querySelector('#individualMenuPageAddToCartContainerAddToCartBtn');
 
 DetailsBtn.addEventListener('click',()=>{
     DetailsBtn.style.borderBottom='5px solid var(--bold-price-color)';
@@ -30,12 +45,14 @@ individualMenuPageAddToCartContainerAddToCartBtn.addEventListener('click',()=>{
     let menuId = individualMenuPageAddToCartContainerAddToCartBtn.getAttribute('menuId');
     let currCartStatus = individualMenuPageAddToCartContainerAddToCartBtn.getAttribute('cart');
     if(currCartStatus==='removed'){
-        console.log(menuId)
+        //adding menu to session 
+        addMenuToCart(menuId);
         individualMenuPageAddToCartContainerAddToCartBtn.setAttribute('cart','added');
         individualMenuPageAddToCartContainerAddToCartBtn.innerText='Remove from cart';
         alert('menu added to cart');
     }else if(currCartStatus==='added'){
-        console.log(menuId)
+        //removing menu to session 
+        removeMenuFromCart(menuId);
         individualMenuPageAddToCartContainerAddToCartBtn.setAttribute('cart','removed');
         individualMenuPageAddToCartContainerAddToCartBtn.innerText='Add to cart';
         alert('menu removed from cart');

@@ -58,3 +58,25 @@ body {
     color: '#2F3438' !important; 
     border-radius: 5px;
 }
+
+#tableNoContainer{
+    width: 95%;
+    margin: 10px auto;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+#tableNoContainer > label{
+    font-size: 2.5rem;
+}
+
+#tableNoContainer > select{
+    font-size: 2.5rem;
+    padding: 0px 20px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}

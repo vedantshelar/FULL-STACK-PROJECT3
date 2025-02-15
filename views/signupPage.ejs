@@ -6,18 +6,22 @@
                 <p>Welcome to</p>
                 <p>Joy<span style="color: #F5C113;">Food</span></p>
             </div>
-            <form id="signupForm">
+            <form id="signupForm" action="/user/signup" method="post">
                 <div class="formControls">
                     <label for="">Name</label>
-                    <input type="text" name="">
+                    <input type="text" name="name" required>
+                </div>
+                <div class="formControls">
+                    <label for="">Email</label>
+                    <input type="email" name="email" required>
                 </div>
                 <div class="formControls">
                     <label for="">Mobile No</label>
-                    <input type="number" name="">
+                    <input type="number" name="mobileNumber" required>
                 </div>
                 <div class="formControls">
                     <label for="">Password</label>
-                    <input type="password" name="">
+                    <input type="password" name="password" required>
                 </div>
                 <button class="signupBtn" style="margin-top: 20px;" type="submit">Sign up</button>
             </form>

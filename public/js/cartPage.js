@@ -1,44 +1,118 @@
-let cartPaneMainContainer = document.querySelector('.cartPaneMainContainer');
-let itemCount = cartPaneMainContainer.childElementCount;
-let arrCount = [];
-for (let i = 0; i < itemCount; i++) {
-    arrCount.push(1);
-}
-determinePrice();
+//initialise function which load menus which are added to cart and compute menu price based on quantity
 
-cartPaneMainContainer.addEventListener('click', function (event) {
-    let currElement = event.target;
-    if (currElement.className.includes('incrementQntyBtn')) {
-        let currRootNodeNo = parseInt(currElement.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('itemNo'));
-        let qntyElement = currElement.parentNode.previousElementSibling;
-        let currElementPrice = currElement.parentNode.parentNode.previousElementSibling.querySelector('.cartPageQntyPrice');
-        let currElementPriceInNumberFormat = parseInt(currElementPrice.getAttribute('itemPrice'));//original item price
-        arrCount[currRootNodeNo] = arrCount[currRootNodeNo] + 1;
-        qntyElement.setAttribute('qnty', arrCount[currRootNodeNo]);
-        qntyElement.innerText = `${arrCount[currRootNodeNo]}`;
-        currElementPrice.innerText = incrementItemPrice(currElementPriceInNumberFormat, arrCount[currRootNodeNo]);
-    } else if (currElement.className.includes('decrementQntyBtn')) {
-        let currRootNodeNo = parseInt(currElement.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('itemNo'));
-        let qntyElement = currElement.parentNode.nextElementSibling;
-        let currElementPrice = currElement.parentNode.parentNode.previousElementSibling.querySelector('.cartPageQntyPrice');
-        let currElementPriceInNumberFormat = parseInt(currElementPrice.getAttribute('itemPrice'));//original item price
-        let tempCurrElementPriceInNumberFormat = parseInt(currElementPrice.innerText);//current item price
-        if (arrCount[currRootNodeNo] > 0) {
-            arrCount[currRootNodeNo] = arrCount[currRootNodeNo] - 1;
-            qntyElement.setAttribute('qnty', arrCount[currRootNodeNo]);
-            qntyElement.innerText = `${arrCount[currRootNodeNo]}`;
-            currElementPrice.innerText = decrementItemPrice(tempCurrElementPriceInNumberFormat, currElementPriceInNumberFormat);
+function loadCartMenusAndUpdateTotalItemPrice() {
+    loadCartMenus().then((res) => {
+        changeTheTotalPirceBasedOnHalfAndFullDish();
+        updateTotalItemPrice();
+    })
+}
+
+//load menus which are added to cart
+
+async function loadCartMenus() {
+    try {
+        if (localStorage.getItem("cartInfo") && localStorage.getItem("cartInfo").length > 0) {
+            const cartInfo = JSON.parse(localStorage.getItem("cartInfo"));
+            const newPostRequest = {
+                cartInfo: cartInfo
+            }
+            const menus = await axios.post("http://localhost:3000/user/getMenusData", newPostRequest);
+            if (menus.data != 'noMenusAddedToCart') {
+                let categoryMenuListMainContainer = document.querySelector('#categoryMenuListMainContainer');
+                let i = 0;
+                for (menu of menus.data) {
+                    let menuElement = document.createElement('div');
+                    menuElement.setAttribute('itemNo', i);
+                    menuElement.setAttribute('menuId', menu._id);
+                    menuElement.classList.add('categoryMenuListBox');
+                    menuElement.classList.add('cartPageMenuListBox');
+                    if (menu.type === 'veg') {
+                        menuElement.innerHTML = `<a class="categoryMenuListInnerBox1" href="/user/menu/${menu._id}">
+                        <img src="${menu.menuImg}" alt="img">
+                    </a>
+                    <div class="categoryMenuListInnerBox2">
+                        <a class="categoryMenuListBoxMenuInfo" href="/user/menu/${menu._id}">
+                            <p class="categoryMenuListBoxMenuTitle">${menu.menuName} <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
+                            <p class="categoryMenuListBoxMenuDescription">
+                                ${menu.description.slice(0,70)}...
+                            </p>
+                        </a>
+                        <div class="cartPagePriceContainer">
+                            <div>
+                                <input type="radio" name="price${i}" value="${menu.fullFrontPrice}" class="cartPageFUllPrice" checked>
+                                <span>${menu.fullFrontPrice}/Full</span>
+                            </div> 
+                            <div>
+                                <input type="radio" name="price${i}" value="${menu.halfFrontPrice}" class="cartPageHalfPrice">
+                                <span>${menu.halfFrontPrice}/Half</span>
+                            </div>
+                        </div>
+                        <div class="cartPageCookingRequestBox"> 
+                            <input type="text" name="cookingRequest" placeholder="cooking request if any">
+                        </div>
+                        <div class="categoryMenuListBoxMenuPriceSection">
+                            <div>
+                                <i class="fa-solid fa-indian-rupee-sign"></i><span class="cartPageQntyPrice"
+                                    itemPrice="${menu.fullFrontPrice}">${menu.fullFrontPrice}</span>
+                            </div>
+                            <div class="cartPageQntyController">
+                                <span><i class="fa-solid fa-square-minus decrementQntyBtn" onclick="handleQnty(this,1)"></i></span>
+                                <span class="qnty" qnty="1">1</span>
+                                <span><i class="fa-solid fa-square-plus incrementQntyBtn" onclick="handleQnty(this,2)"></i></span>
+                            </div>
+                        </div>
+                    </div>`;
+                    } else {
+                        menuElement.innerHTML = `<a class="categoryMenuListInnerBox1" href="/user/menu/${menu._id}">
+                        <img src="${menu.menuImg}" alt="">
+                    </a>
+                    <div class="categoryMenuListInnerBox2">
+                        <a class="categoryMenuListBoxMenuInfo" href="/user/menu/${menu._id}">
+                            <p class="categoryMenuListBoxMenuTitle">${menu.menuName} <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"></p>
+                            <p class="categoryMenuListBoxMenuDescription">
+                                ${menu.description}...
+                            </p>
+                        </a>
+                        <div class="cartPagePriceContainer">
+                            <div>
+                                <input type="radio" name="price${i}" value="${menu.fullFrontPrice}" class="cartPageFUllPrice" checked>
+                                <span>${menu.fullFrontPrice}/Full</span>
+                            </div> 
+                            <div>
+                                <input type="radio" name="price${i}" value="${menu.halfFrontPrice}" class="cartPageHalfPrice">
+                                <span>${menu.halfFrontPrice}/Half</span>
+                            </div>
+                        </div>
+                        <div class="cartPageCookingRequestBox"> 
+                            <input type="text" name="cookingRequest" placeholder="cooking request if any">
+                        </div>
+                        <div class="categoryMenuListBoxMenuPriceSection">
+                            <div>
+                                <i class="fa-solid fa-indian-rupee-sign"></i><span class="cartPageQntyPrice"
+                                    itemPrice="${menu.fullFrontPrice}">${menu.fullFrontPrice}</span>
+                            </div>
+                            <div class="cartPageQntyController">
+                                <span><i class="fa-solid fa-square-minus decrementQntyBtn" onclick="handleQnty(this,1)"></i></span>
+                                <span class="qnty" qnty="1">1</span>
+                                <span><i class="fa-solid fa-square-plus incrementQntyBtn" onclick="handleQnty(this,2)"></i></span>
+                            </div>
+                        </div>
+                    </div>`;
+                    }
+                    categoryMenuListMainContainer.append(menuElement);
+                    i = i + 1;
+                }
+            } else {
+                categoryMenuListMainContainer.innerHTML = "<h1>No Menu In Cart</h1>";
+                document.querySelector('#placeOrderContainer').style.display='none';
+            }
+        } else {
+            categoryMenuListMainContainer.innerHTML = "<h1>No Menu In Cart</h1>";
+            document.querySelector('#placeOrderContainer').style.display='none';
         }
+    } catch (error) {
+        console.log(error);
     }
-    updateTotalItemPrice();
-})
-
-function incrementItemPrice(currPrice, counter) {
-    return currPrice * counter;
-}
-
-function decrementItemPrice(currPrice, originalPrice) {
-    return currPrice - originalPrice;
 }
 
 function updateTotalItemPrice() {
@@ -52,41 +126,113 @@ function updateTotalItemPrice() {
     totalItemPrice.innerHTML = `Total : <i class="fa-solid fa-indian-rupee-sign"></i><span>${tempTotalItemPrice}</span>`;
 }
 
-// full and half price selection 
+//this is function works when quantity price is increment or decrement 
 
-function determinePrice() {
-    let price = 0;
+function changeTheTotalPirceBasedOnQnty() {
+    let cartPageMenuListBoxes = document.querySelectorAll('.cartPageMenuListBox');
+    for (categoryMenuListBox of cartPageMenuListBoxes) {
+        let cartPageFUllPriceNode = categoryMenuListBox.querySelector('.cartPageFUllPrice');
+        let cartPageHalfPriceNode = categoryMenuListBox.querySelector('.cartPageHalfPrice');
+        let mainPrice = categoryMenuListBox.querySelector('.cartPageQntyPrice');
+        if (cartPageFUllPriceNode.checked) {
+            let currQnty = parseInt(categoryMenuListBox.querySelector('.qnty').getAttribute('qnty'));
+            let fullPriceInNumber = parseInt(cartPageFUllPriceNode.value);
+            mainPrice.setAttribute('itemPrice', currQnty * fullPriceInNumber);
+            mainPrice.innerText = currQnty * fullPriceInNumber;
+            updateTotalItemPrice();
+        }
+        if (cartPageHalfPriceNode.checked) {
+            let currQnty = parseInt(categoryMenuListBox.querySelector('.qnty').getAttribute('qnty'));
+            let halfPriceInNumber = parseInt(cartPageHalfPriceNode.value);
+            mainPrice.setAttribute('itemPrice', currQnty * halfPriceInNumber);
+            mainPrice.innerText = currQnty * halfPriceInNumber;
+            updateTotalItemPrice();
+        }
+    }
+}
+
+//this function works when full or half option is selected
+
+function changeTheTotalPirceBasedOnHalfAndFullDish() {
     let cartPageFUllPrices = document.querySelectorAll('.cartPageFUllPrice');
     let cartPageHalfPrices = document.querySelectorAll('.cartPageHalfPrice');
     for (cartPageFUllPrice of cartPageFUllPrices) {
-        if (cartPageFUllPrice.checked) {
-            cartPageFUllPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').setAttribute('itemPrice', cartPageFUllPrice.value);
-            //manage price with respect to menu quantity
-            let qnty = parseInt(cartPageFUllPrice.parentNode.parentNode.parentNode.querySelector('.qnty').getAttribute('qnty'));
-            cartPageFUllPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').innerText = (cartPageFUllPrice.value * qnty);
-        }
+        cartPageFUllPrice.addEventListener('change', (event) => {
+            let currItemPriceElement = event.target;
+            let categoryMenuListInnerBox2 = currItemPriceElement.parentNode.parentNode.parentNode;
+            let qnty = categoryMenuListInnerBox2.querySelector('.qnty').getAttribute('qnty');
+            let currItemFullPrice = event.target.value;
+            let mainPrice = categoryMenuListInnerBox2.querySelector('.cartPageQntyPrice');
+            let tempMainPrice = 0;
+            qnty = parseInt(qnty);
+            currItemFullPrice = parseInt(currItemFullPrice);
+            tempMainPrice = qnty * currItemFullPrice;
+            mainPrice.setAttribute('itemPrice', tempMainPrice);
+            mainPrice.innerText = tempMainPrice;
+            updateTotalItemPrice();
+        })
     }
     for (cartPageHalfPrice of cartPageHalfPrices) {
-        if (cartPageHalfPrice.checked) {
-            cartPageHalfPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').setAttribute('itemPrice', cartPageHalfPrice.value);
-            //manage price with respect to menu quantity
-            let qnty = parseInt(cartPageHalfPrice.parentNode.parentNode.parentNode.querySelector('.qnty').getAttribute('qnty'));
-            cartPageHalfPrice.parentNode.parentNode.parentNode.querySelector('.cartPageQntyPrice').innerText = (cartPageHalfPrice.value * qnty);
-        }
+        cartPageHalfPrice.addEventListener('change', (event) => {
+            let currItemPriceElement = event.target;
+            let categoryMenuListInnerBox2 = currItemPriceElement.parentNode.parentNode.parentNode;
+            let qnty = categoryMenuListInnerBox2.querySelector('.qnty').getAttribute('qnty');
+            let currItemHalfPrice = event.target.value;
+            let mainPrice = categoryMenuListInnerBox2.querySelector('.cartPageQntyPrice');
+            let tempMainPrice = 0;
+            qnty = parseInt(qnty);
+            currItemHalfPrice = parseInt(currItemHalfPrice);
+            tempMainPrice = qnty * currItemHalfPrice;
+            mainPrice.setAttribute('itemPrice', tempMainPrice);
+            mainPrice.innerText = tempMainPrice;
+            updateTotalItemPrice();
+        })
     }
 }
 
-let cartPageFUllPrices = document.querySelectorAll('.cartPageFUllPrice');
-let cartPageHalfPrices = document.querySelectorAll('.cartPageHalfPrice');
+// handling quantity 
 
-for (cartPageFUllPrice of cartPageFUllPrices) {
-    cartPageFUllPrice.addEventListener('click', (event) => {
-        determinePrice()
-    })
+function handleQnty(currQntyBtn, num) {
+    let cartPageQntyController = currQntyBtn.parentNode.parentNode;
+    if (num == 1) {
+        let qntyNode = cartPageQntyController.querySelector('.qnty');
+        let qntyInNumber = parseInt(qntyNode.getAttribute('qnty'));
+        if (qntyInNumber >= 1) {
+            qntyInNumber = qntyInNumber - 1;
+            qntyNode.setAttribute('qnty', qntyInNumber);
+            qntyNode.innerText = qntyInNumber;
+            changeTheTotalPirceBasedOnQnty()
+        }
+    } else if (num == 2) {
+        let qntyNode = cartPageQntyController.querySelector('.qnty');
+        let qntyInNumber = parseInt(qntyNode.getAttribute('qnty'));
+        qntyInNumber = qntyInNumber + 1;
+        qntyNode.setAttribute('qnty', qntyInNumber);
+        qntyNode.innerText = qntyInNumber;
+        changeTheTotalPirceBasedOnQnty()
+    }
 }
 
-for (cartPageHalfPrice of cartPageHalfPrices) {
-    cartPageHalfPrice.addEventListener('click', (event) => {
-        determinePrice()
-    })
-}
+let placeOrderBtn = document.querySelector('#placeOrderBtn');
+
+placeOrderBtn.addEventListener('click',async (event)=>{
+    if (localStorage.getItem("cartInfo") && localStorage.getItem("cartInfo").length > 0) {
+        const cartInfo = JSON.parse(localStorage.getItem("cartInfo"));
+        let tableNo = parseInt(document.querySelector('#tableNo').value);
+        let orderDetails = [];
+        let menuItems = document.querySelectorAll('.cartPageMenuListBox');
+        for(menuItem of menuItems){
+            let singleOrderDetail = {};
+            singleOrderDetail.menuId = menuItem.getAttribute('menuId');
+            singleOrderDetail.isFullPlate=menuItem.querySelector('.cartPageFUllPrice').checked;
+            singleOrderDetail.qnty=parseInt(menuItem.querySelector('.qnty').getAttribute('qnty'));
+            singleOrderDetail.cookingRequest= menuItem.querySelector('.cartPageCookingRequestBox input').value;
+            singleOrderDetail.userId=user._id;
+            singleOrderDetail.tableNo=tableNo;//fetch the table number dynamically
+            orderDetails.push(singleOrderDetail);
+        }
+        console.log(orderDetails);
+        const response = await axios.post(`http://localhost:3000/user/${user._id}/${tableNo}/placeOrder`, {orderDetails});
+        window.location.href=response.data.redirectUrl;
+    }
+})

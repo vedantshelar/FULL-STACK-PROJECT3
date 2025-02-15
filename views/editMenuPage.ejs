@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/pendingOrdersPage.css">
+    <link rel="stylesheet" href="/css/editMenuPage.css">
+</head>
+
+<body>
+    <div id="adminMainContainer">
+        <div id="adminNavBarContainer">
+            <div id="adminNavBar">
+                <a class="adminMenus" href="/admin/<%=admin._id%>/profile">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <a class="adminMenus" href="/admin/<%=admin._id%>">
+                    <i class="fa-solid fa-chart-line"></i>
+                </a>
+                <a class="adminMenus" href="/admin/pending">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </a>
+                <a class="adminMenus" href="/admin/completed">
+                    <i class="fa-solid fa-list-check"></i>
+                </a>
+                <a class="adminMenus" href="/admin/menu">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </a>
+                <a class="adminMenus" href="/admin/menu/edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+            </div>
+        </div>
+        <div id="adminDashboardContainer">
+            <div id="adminDashboarNavContainer">
+                <i class="fa-brands fa-slack"></i>
+                <p>Dashboard</p>
+            </div>
+            <div id="adminEditMenuFormPageMainContainer">
+                <p >Edit Menu's</p>
+                <div id="adminEditMenuFormFilterContainer">
+                    <div>
+                        <input type="search" name="search" id="search" placeholder="Search by menu name">
+                    </div>
+                    <div>
+                        <div>
+                            <div class="dropdownControls">
+                                <label for="">Category</label>
+                                <select name="category" id="category">
+                                    <option value="all">all</option>
+                                    <option value="rice">rice</option>
+                                    <option value="noodle">noodle</option>
+                                    <option value="pizza">pizza</option>
+                                    <option value="drink">drink</option>
+                                </select>
+                            </div>
+                            <div class="dropdownControls">
+                                <label for="">Type</label>
+                                <select name="type" id="type">
+                                    <option value="all">all</option>
+                                    <option value="veg">veg</option>
+                                    <option value="nonVeg">non-veg</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="adminEditMenuFormPageMenuContainer">
+                    <%for(menu of menus) {%>
+                        <div class="editMenuBox" type="<%=menu.type%>">
+                            <div class="editMenuBoxImgContainer">
+                                <img src="<%=menu.menuImg%>" alt="menuImg">
+                            </div>
+                            <div class="editMenuBoxInfoContainer">
+                                <div class="menuTitleContainer">
+                                    <p class="menuTitle"><%=menu.menuName%></p> 
+                                    <%if(menu.type==='veg'){%><img class="veg" src="/assets/veg.png" alt="veg" width="30px" style="margin-left: 5px; margin-top: 5px; display: block;"><%}else{%><img class="nonveg" src="/assets/nonVeg.png" alt="veg" width="30px" style="margin-left: 5px; margin-top: 5px; display: block;"><%}%>
+                                </div>
+                                <div class="menuTitlePriceContainer">
+                                    <span> <i class="fa-solid fa-indian-rupee-sign"></i><%=menu.fullFrontPrice%>/F ,</span><span><i class="fa-solid fa-indian-rupee-sign"></i><%=menu.halfFrontPrice%>/H</span></span><span class="menuCategoryOption">Category : <%=menu.category%></span>
+                                </div>
+                                <div class="editMenuBtnContainer">
+                                    <a href="/admin/menu/<%=menu._id%>/edit" class="editMenuEditBtn">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div> 
+                </div>  
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/7e49fc305e.js" crossorigin="anonymous"></script>
+    <script src="/js/editMenuPage.js"></script>
+</body>
+
+</html>
