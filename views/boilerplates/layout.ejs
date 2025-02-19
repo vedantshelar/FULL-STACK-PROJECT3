@@ -17,7 +17,9 @@
 
 <body>
   <section id="main">
-    <%- include('../includes/navbar.ejs') %>
+    <%if(user){%>
+      <%- include('../includes/navbar.ejs') %>
+      <%}%>
       <%-body -%>
   </section>
   <script src="/js/utils.js"></script>

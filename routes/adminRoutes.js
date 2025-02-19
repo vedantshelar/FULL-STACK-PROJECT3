@@ -1,13 +1,15 @@
 const express = require('express');
 const ADMIN = require('../models/ADMIN');
 const MENU = require('../models/MENU');
+const PENDING_ORDERS = require('../models/PENDING_ORDERS');
+const COMPLETE_ORDERS = require('../models/COMPLETE_ORDERS');
 const multer = require('multer');
 const storage = require('../cloudinaryConfig');
 const express_session = require('express-session');
 let flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const {getHashPassword,isCorrectPassword,isAuthenticatedAdmin} = require('../utils');
+const {getHashPassword,isCorrectPassword,isAuthenticatedAdmin,getOrderGrossProfit,getOrderProfit} = require('../utils');
 const USER = require('../models/USER');
 const router = express.Router({ mergeParams: true });
 if(process.env.NODE_ENV!="production"){
@@ -67,8 +69,13 @@ passport.use('admin-local', new LocalStrategy(
 const upload = multer({ storage: storage });
 
 
-router.get('/pending',isAuthenticatedAdmin,(req, res) => {
-    res.render('pendingOrdersPage.ejs');
+router.get('/pending',isAuthenticatedAdmin,async(req, res) => {
+    try {
+        let pendingOrders = await PENDING_ORDERS.find({}).populate('menuId').populate('userId');
+        res.render('pendingOrdersPage.ejs',{pendingOrders});
+    } catch (error) {
+        next(error);
+    }
 })
 
 router.get('/completed',isAuthenticatedAdmin,(req, res) => {
@@ -218,5 +225,59 @@ router.route('/menu/:menuId/edit')
         console.log('menu has been deleted successfully!');
         res.redirect('/admin/menu/edit');
     })
+
+router.route('/:orderId/start')
+.put(async(req,res,next)=>{
+try {
+    const orderId = req.body.orderId;
+    await PENDING_ORDERS.findByIdAndUpdate(orderId,{isStart:true});
+    res.send(true);
+} catch (error) {
+    next(error);
+}
+});
+
+router.route('/:orderId/destroy') 
+.delete(async(req,res,next)=>{
+try {
+    const orderId = req.params.orderId;
+    console.log(orderId);
+    await PENDING_ORDERS.findByIdAndUpdate(orderId,{isCancel:true});
+    console.log('order has been canceled');
+    res.send(true);
+} catch (error) {
+    next(error);
+}
+});
+
+router.route('/:orderId/complete')
+.post(async(req,res,next)=>{
+try {
+    let newOrder = {};
+    const orderId = req.params.orderId;
+    let order = await PENDING_ORDERS.findById(orderId,{_id:0}).populate('menuId');
+    if(order.isFullPlate){
+        newOrder.orderGrossProfit = getOrderGrossProfit(order.menuId.fullFrontPrice,order.menuId.fullBackPrice,order.qnty);
+        newOrder.orderProfit = getOrderProfit(order.menuId.fullFrontPrice,order.qnty);
+    }else{
+        newOrder.orderGrossProfit = getOrderGrossProfit(order.menuId.halfFrontPrice,order.menuId.halfBackPrice,order.qnty);
+        newOrder.orderProfit = getOrderProfit(order.menuId.halfFrontPrice,order.qnty);
+    }
+    newOrder.menuId = order.menuId._id;
+    newOrder.userId = order.userId;
+    newOrder.isFullPlate = order.isFullPlate;
+    newOrder.qnty = order.qnty;
+    newOrder.tableNo = order.tableNo;
+    newOrder.orderPlacedDate = order.orderPlacedDate;
+    newOrder.orderPlacedTime = order.orderPlacedTime;
+    
+    await COMPLETE_ORDERS.create(newOrder);
+    await PENDING_ORDERS.findByIdAndUpdate(orderId,{isComplete:true});
+    console.log('Order has been completed');
+    res.send(true);
+} catch (error) {
+    next(error);
+}
+});
 
 module.exports = router;

@@ -70,7 +70,7 @@ async function loadCartMenus() {
                         <a class="categoryMenuListBoxMenuInfo" href="/user/menu/${menu._id}">
                             <p class="categoryMenuListBoxMenuTitle">${menu.menuName} <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"></p>
                             <p class="categoryMenuListBoxMenuDescription">
-                                ${menu.description}...
+                                ${menu.description.slice(0,70)}...
                             </p>
                         </a>
                         <div class="cartPagePriceContainer">
@@ -229,10 +229,12 @@ placeOrderBtn.addEventListener('click',async (event)=>{
             singleOrderDetail.cookingRequest= menuItem.querySelector('.cartPageCookingRequestBox input').value;
             singleOrderDetail.userId=user._id;
             singleOrderDetail.tableNo=tableNo;//fetch the table number dynamically
-            orderDetails.push(singleOrderDetail);
+            if(singleOrderDetail.qnty>0){
+                orderDetails.push(singleOrderDetail);
+            }
         }
-        console.log(orderDetails);
         const response = await axios.post(`http://localhost:3000/user/${user._id}/${tableNo}/placeOrder`, {orderDetails});
+        localStorage.setItem("cartInfo",JSON.stringify([]));
         window.location.href=response.data.redirectUrl;
     }
 })

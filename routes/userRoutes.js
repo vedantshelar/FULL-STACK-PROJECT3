@@ -1,6 +1,7 @@
 const express = require('express');
 const MENU = require('../models/MENU');
 const USER = require('../models/USER');
+const PENDING_ORDERS = require('../models/PENDING_ORDERS');
 const express_session = require('express-session');
 let flash = require('connect-flash');
 const passport = require('passport');
@@ -179,8 +180,14 @@ router.get('/:userId/orderHistory',isAuthenticatedUser,(req,res)=>{
 })
 
 
-router.get('/:userId/orderStatus',isAuthenticatedUser,(req,res)=>{
-    res.render('orderStatusPage.ejs');
+router.get('/:userId/orderStatus',isAuthenticatedUser,async(req,res,next)=>{
+    try {
+        const userId = req.params.userId;
+        const orders = await PENDING_ORDERS.find({userId:userId}).populate('menuId');
+        res.render('orderStatusPage.ejs',{orders});
+    } catch (error) {
+        next(error);
+    }
 })
 
 router.route('/:userId/:tableNo/placeOrder')
@@ -190,6 +197,8 @@ try {
     const tableNo = req.params.tableNo;
     console.log('table number : '+tableNo);
     console.log(req.body);
+    await PENDING_ORDERS.insertMany(req.body.orderDetails);
+    console.log('Your order has been placed');
     res.json({redirectUrl:`/user/${userId}/orderStatus`});
 } catch (error) {
     next(error);

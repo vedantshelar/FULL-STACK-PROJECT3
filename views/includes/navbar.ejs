@@ -4,16 +4,16 @@
             <i class="fa-solid fa-bars-staggered" id="bar"></i>
         </div>
         <div id="cartBox">
-            <a href="/user/101/cart"><i class="fa-solid fa-cart-shopping" id="cart"></i></a>
+            <a href="/user/<%=user._id%>/cart"><i class="fa-solid fa-cart-shopping" id="cart"></i></a>
         </div>
     </div>
     <div class="innerNavbarBox2">
         <ul id="menuItemContainer">
-            <a href="/user/101" class="menuItem"><li >Home</li></a>
+            <a href="/user/<%=user._id%>/" class="menuItem"><li >Home</li></a>
             <a href="/user/category" class="menuItem"><li >Category</li></a>
-            <a href="/user/101/orderHistory" class="menuItem"><li >Order History</li></a>
-            <a href="/user/101/orderStatus" class="menuItem"><li >Order Status</li></a>
-            <a href="/user/101/cart" class="menuItem"><li >Cart</li></a>
+            <a href="/user/<%=user._id%>/orderHistory" class="menuItem"><li >Order History</li></a>
+            <a href="/user/<%=user._id%>/orderStatus" class="menuItem"><li >Order Status</li></a>
+            <a href="/user/<%=user._id%>/cart" class="menuItem"><li >Cart</li></a>
             <a href="/user/bestSelling" class="menuItem"><li >Best Selling</li></a>
         </ul>
     </div>

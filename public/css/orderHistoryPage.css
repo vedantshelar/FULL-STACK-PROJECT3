@@ -43,3 +43,8 @@ body{
     background-color: rgba(33, 159, 33, 0.871) !important;
     color: white;
 }
+
+.orderCanceledStatusBtn{
+    background-color: rgba(231, 53, 47, 0.871) !important;
+    color: white;
+}
