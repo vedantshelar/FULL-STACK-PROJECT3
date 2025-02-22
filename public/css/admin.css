@@ -186,7 +186,8 @@ padding-left: 10px;
    cursor: pointer;
 }
 
-.adminPanelInnerMainContainer1GraphContainerActiveBtn{
+.adminPanelInnerMainContainer1GraphContainerDisableBtn{
+    transition: all 0.2s linear;
     background-color: rgb(226, 226, 226) !important;
     color: rgb(96, 96, 96) !important;
 } 

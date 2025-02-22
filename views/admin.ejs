@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/admin.css">
 </head>
-<body>
+
+<body onload="load()">
     <div id="adminMainContainer">
         <div id="adminNavBarContainer">
             <div id="adminNavBar">
@@ -19,7 +21,7 @@
                 <a class="adminMenus" href="/admin/pending">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                 </a>
-                <a class="adminMenus" href="/admin/about">
+                <a class="adminMenus" href="/admin/completed">
                     <i class="fa-solid fa-list-check"></i>
                 </a>
                 <a class="adminMenus" href="/admin/menu">
@@ -29,18 +31,19 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
             </div>
-        </div> 
+        </div>
         <div id="adminDashboardContainer">
-           <div id="adminDashboarNavContainer">
-            <i class="fa-brands fa-slack"></i><p>Dashboard</p>
-           </div>
-           <div id="adminPanelMainContainer">
+            <div id="adminDashboarNavContainer">
+                <i class="fa-brands fa-slack"></i>
+                <p>Dashboard</p>
+            </div>
+            <div id="adminPanelMainContainer">
                 <div class="adminPanelInnerMainContainer1">
                     <div class="adminPanelInnerMainContainer1InfoContainer">
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
-                                <p>Total Revenue</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p>Total Gross Profit</p>
+                                <p id="totalGrossProfit"><i class="fa-solid fa-indian-rupee-sign"></i>0</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-chart-simple"></i>
@@ -49,16 +52,19 @@
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
                                 <p>Total Profit</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p id="totalProfit"><i class="fa-solid fa-indian-rupee-sign"></i>0</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-money-bill-wave"></i>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="adminPanelInnerMainContainer1GraphContainer">
                         <div>
-                            <p>Revenue</p><div><button>Revenue</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Profit</button></div>
+                            <p id="grossProfitAndProfitLabel">Gross Profit</p>
+                            <div><button id="grossProfitBtn">Gross
+                                    Profit</button><button id="profitBtn"
+                                    class="adminPanelInnerMainContainer1GraphContainerDisableBtn">Profit</button></div>
                         </div>
                         <canvas id="revenueGraph"></canvas>
                     </div>
@@ -68,8 +74,8 @@
                     <div class="adminPanelInnerMainContainer1InfoContainer">
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
-                                <p>Monthly Revenue</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p>Monthly Gross Profit</p>
+                                <p id="monthlyGrossProfit"><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-chart-simple"></i>
@@ -77,8 +83,8 @@
                         </div>
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
-                                <p>Weekly Revenue</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p>Weekly Gross Profit</p>
+                                <p id="weeklyGrossProfit"><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-money-bill-wave"></i>
@@ -86,17 +92,20 @@
                         </div>
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
-                                <p>Daily Revenue</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p>Daily Gross Profit</p>
+                                <p id="dailyGrossProfit"><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-money-bill-wave"></i>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="adminPanelInnerMainContainer1GraphContainer">
                         <div>
-                            <p>Revenue</p><div><button>Monthly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Weekly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Daily</button></div>
+                            <p>Gross Profit</p>
+                            <div><button id="monthlyGrossProfitBtn">Monthly</button><button id="weeklyGrossProfitBtn"
+                                    class="adminPanelInnerMainContainer1GraphContainerDisableBtn">Weekly</button><button id="dailyGrossProfitBtn"
+                                    class="adminPanelInnerMainContainer1GraphContainerDisableBtn">Daily</button></div>
                         </div>
                         <canvas id="revenueGraph2"></canvas>
                     </div>
@@ -107,7 +116,7 @@
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
                                 <p>Monthly Profit</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p id="monthlyProfit"><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-chart-simple"></i>
@@ -116,7 +125,7 @@
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
                                 <p>Weekly Profit</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p id="weeklyProfit"><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-money-bill-wave"></i>
@@ -125,16 +134,19 @@
                         <div class="adminPanelInnerMainContainer1InfoContainerBox">
                             <div>
                                 <p>Daily Profit</p>
-                                <p><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
+                                <p id="dailyProfit"><i class="fa-solid fa-indian-rupee-sign"></i>321</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-money-bill-wave"></i>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="adminPanelInnerMainContainer1GraphContainer">
                         <div>
-                            <p>Profit</p><div><button>Monthly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Weekly</button><button class="adminPanelInnerMainContainer1GraphContainerActiveBtn">Daily</button></div>
+                            <p>Profit</p>
+                            <div><button id="monthlyProfitBtn">Monthly</button><button id="weeklyProfitBtn"
+                                    class="adminPanelInnerMainContainer1GraphContainerDisableBtn">Weekly</button><button
+                                    class="adminPanelInnerMainContainer1GraphContainerDisableBtn" id="dailyProfitBtn">Daily</button></div>
                         </div>
                         <canvas id="revenueGraph3"></canvas>
                     </div>
@@ -149,16 +161,19 @@
                     </div>
                     <div>
                         <p>Popular Menu's</p>
-                         <div>
+                        <div>
                             <canvas id="revenueGraph5"></canvas>
-                         </div>
+                        </div>
                     </div>
                 </div>
-           </div> 
+            </div>
         </div>
     </div>
+    <script src="/js/utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/7e49fc305e.js" crossorigin="anonymous"></script>
     <script src="/js/admin.js"></script>
 </body>
+
 </html>

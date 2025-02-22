@@ -56,6 +56,27 @@ function getOrderGrossProfit(frontPrice, backPrice, qnty) {
     return actualProfit;
 }
 
+function bubbleSort(arr1,arr2) {
+    let n = arr1.length;
+    // Loop through all elements of the array
+    for (let i = 0; i < n - 1; i++) {
+      // Last i elements are already in place
+      for (let j = 0; j < n - i - 1; j++) {
+        // Swap if the element found is greater than the next element
+        if (arr1[j] < arr1[j + 1]) {
+          let temp1 = arr1[j];
+          let temp2 = arr2[j];
+          arr1[j] = arr1[j + 1];
+          arr2[j] = arr2[j + 1];
+          arr1[j + 1] = temp1;
+          arr2[j + 1] = temp2;
+        }
+      }
+    }
+    return {arr1:arr1,arr2:arr2};
+  }
+  
+
 
 module.exports = {
     getHashPassword,
@@ -65,5 +86,6 @@ module.exports = {
     getCurrentDate,
     getCurrentTime,
     getOrderProfit,
-    getOrderGrossProfit
+    getOrderGrossProfit,
+    bubbleSort
 }
