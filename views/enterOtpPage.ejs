@@ -1,0 +1,32 @@
+<% layout('./boilerplates/layout') %>
+
+    <body>
+        <div id="signupPageMainContainer">
+            <div id="signupPageLogoAndTitleContainer">
+                <p></p>
+                <p>Joy<span style="color: #F5C113;">Food</span></p>
+            </div><hr>
+            <form id="signupForm" action="/user/<%=email%>/password/change" method="get" onsubmit="return validateOtp()">
+                <div class="formControls">
+                    <label for="">Enter OTP</label>
+                    <input type="number" id="otp">
+                </div>
+                <button class="signupBtn" type="submit">Submit</button>
+            </form>
+        </div>
+        <script>
+            const email = <%-JSON.stringify(email)%>
+            const OTP = <%-JSON.stringify(otp)%>
+            function validateOtp(){
+                let otp = document.querySelector('#otp');
+                if(otp.value==OTP){
+                    return true;
+                }else{
+                    otp.value='';
+                    otp.focus();
+                    alert('Invalid OTP');
+                    return false;
+                }
+            }
+        </script>
+    </body>

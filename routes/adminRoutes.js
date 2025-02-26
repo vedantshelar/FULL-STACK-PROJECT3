@@ -9,7 +9,7 @@ const express_session = require('express-session');
 let flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const { getHashPassword, isCorrectPassword, isAuthenticatedAdmin, getOrderGrossProfit, getOrderProfit } = require('../utils');
+const { getHashPassword, isCorrectPassword, isAuthenticatedAdmin, getOrderGrossProfit, getOrderProfit,generateOTP,sendEmail } = require('../utils');
 const USER = require('../models/USER');
 const { bubbleSort } = require('../utils');
 const router = express.Router({ mergeParams: true });
@@ -217,6 +217,59 @@ router.get("/topThreeMenu", isAuthenticatedAdmin, async (req, res, next) => {
         data = arr1;
         label = arr2;
         res.json({ 'data': data, 'label': label });
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('/password/forget',(req,res)=>{
+    res.render('adminForgetPasswordPage.ejs');
+})
+
+router.post('/password/forget/opt',async (req,res,next)=>{
+    let email = req.body.email;
+    let admin = await ADMIN.findOne({email:email});
+    if(admin){
+        const OTP = generateOTP();
+        await sendEmail(email,'Email For Changing Accout Password',OTP);
+        res.locals.email=email;
+        res.locals.otp=OTP;
+        res.render('adminEnterOtpPage.ejs');
+    }else{
+        console.log('Please Enter a Registered Email ID')
+        res.redirect('/admin/password/forget');
+    }
+})
+
+router.route('/:adminEmail/password/change')
+.get(async (req,res,next)=>{
+    try {
+        let email = req.params.adminEmail;
+        let admin = await ADMIN.findOne({email:email});
+        if(admin){
+            res.locals.email=email;
+            res.render('adminChangePasswordForm.ejs');
+        }else{
+            console.log('Please Enter a Registered Email ID')
+            res.redirect('/admin/password/forget');
+        }   
+    } catch (error) {
+     next(error);   
+    }
+})
+.post(async (req,res,next)=>{
+    try {
+        let email = req.params.adminEmail;
+        let admin =await ADMIN.findOne({email:email});
+        if (admin) {
+            admin.password= await getHashPassword(req.body.password1);
+            await admin.save();
+            console.log('your password has been successfully changed!');
+            res.redirect('/admin/signin');
+        } else {
+            console.log('something went wrong! please try again');
+            res.redirect('/admin/signin');
+        }
     } catch (error) {
         next(error);
     }

@@ -31,19 +31,25 @@
                                     <i class="fa-solid fa-indian-rupee-sign"></i>
                                     <%if(order.isFullPlate){%>
                                         <span>
-                                            <%=order.menuId.fullFrontPrice*order.qnty%>
+                                            <%=order.menuId.fullFrontPrice*order.qnty%>/F
                                         </span>
                                         <%}else{%>
                                             <span>
-                                                <%=order.menuId.halfFrontPrice*order.qnty%>
+                                                <%=order.menuId.halfFrontPrice*order.qnty%>/H
                                             </span>
                                             <%}%>
                                 </div>
                                 <div>
                                     <%if(order.isComplete){%>
+                                        <button class="DeleteItemFromOrderHistoryBtn" orderId="<%=order._id%>"
+                                            onclick="deleteOrder(this)"><i class="fa-solid fa-trash"
+                                                style="color: #ffffff;"></i></button>
                                         <button class="orderCompleteStatusBtn"><i
                                                 class="fa-solid fa-circle-check"></i></button>
                                         <%}else if(order.isCancel){%>
+                                            <button class="DeleteItemFromOrderHistoryBtn" orderId="<%=order._id%>"
+                                                onclick="deleteOrder(this)"><i class="fa-solid fa-trash"
+                                                    style="color: #ffffff;"></i></button>
                                             <button class="orderCanceledStatusBtn"><i class="fa-solid fa-ban"
                                                     style="color: #ffffff;"></i></button>
                                             <%}else{%>
@@ -60,8 +66,8 @@
                             <%}%>
         </div>
         <script>
-            setInterval(()=>{
+            setInterval(() => {
                 window.location.reload();
-            },60000);
+            }, 60000);
         </script>
     </body>

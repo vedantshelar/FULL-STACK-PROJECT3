@@ -29,21 +29,21 @@ const completeOrdersSchema = new Schema({
         type: String,
         default: 'No Cooking Request'
     },
-    isStart:{
-        type:Boolean,
-        default:false,
-        required:true
-    },
-    isComplete:{
-        type:Boolean,
-        default:false,
-        required:true
-    },
-    isCancel:{
-        type:Boolean,
-        default:false,
-        required:true
-    },
+    // isStart:{
+    //     type:Boolean,
+    //     default:false,
+    //     required:true
+    // },
+    // isComplete:{
+    //     type:Boolean,
+    //     default:false,
+    //     required:true
+    // },
+    // isCancel:{
+    //     type:Boolean,
+    //     default:false,
+    //     required:true
+    // },
     orderPlacedDate: { 
         type: String, 
         default:getCurrentDate,
@@ -71,6 +71,11 @@ const completeOrdersSchema = new Schema({
     orderProfit:{
         type:Number,
         required:true
+    },
+    isVisibleToUser:{
+        type:Boolean,
+        required:true,
+        default:false
     }
 });
 

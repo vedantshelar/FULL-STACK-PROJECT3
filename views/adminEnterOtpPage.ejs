@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/adminSigninPage.css">
+</head>
+
+<body>
+    <div id="adminSigninPageMainContainer">
+        <div id="adminSigninPageMainInnerContainer">
+        <div id="adminSigninPageImgContainer">
+            <img src="/assets/adminSignupPageBgImg.jpg" alt="image">
+        </div>
+        <div id="adminSigninPageFormContainer">
+            <form id="adminSigninForm" action="/admin/<%=email%>/password/change" method="get" onsubmit="return validateOtp()">
+                <div class="adminFormControls">
+                    <label for="">Enter OTP</label>
+                    <input type="number" name="otp" placeholder="Enter OTP" id="otp" required>
+                </div>
+                <button class="adminSigninBtn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const email = <%-JSON.stringify(email)%>
+    const OTP = <%-JSON.stringify(otp)%>
+    function validateOtp(){
+        let otp = document.querySelector('#otp');
+        if(otp.value==OTP){
+            return true;
+        }else{
+            otp.value='';
+            otp.focus();
+            alert('Invalid OTP');
+            return false;
+        }
+    }
+</script>
+</body>
+
+</html>

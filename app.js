@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const engine = require('ejs-mate');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const {deleteCanceledOrders} = require('./utils');
 const PORT = 3000;
 app.listen(PORT,"0.0.0.0",()=>{
     console.log("server is listening on port number "+PORT);
@@ -36,6 +37,10 @@ main().then(()=>{
 //routes
 app.use('/user',userRoutes);
 app.use('/admin',adminRoutes);
+
+//automatically runs every day at 12am to delete cancelled orders from pending database
+deleteCanceledOrders();
+
 
 app.use((err,req,res,next)=>{
     console.log(err);

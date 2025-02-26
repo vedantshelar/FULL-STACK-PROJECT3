@@ -1,12 +1,16 @@
 const bcrypt = require('bcrypt');
+const cron = require('node-cron');
+const nodemailer = require("nodemailer");
 const dayjs = require('dayjs');
 const USER = require('./models/USER');
 const ADMIN = require('./models/ADMIN');
+if (process.env.NODE_ENV != "production") {
+    require('dotenv').config();
+}
 
 async function getHashPassword(plainPassword) {
     const saltRounds = 10;
     const hashPassword = await bcrypt.hash(plainPassword, saltRounds);
-    console.log(hashPassword);
     return hashPassword;
 }
 
@@ -19,7 +23,7 @@ function isAuthenticatedUser(req, res, next) {
     if (req.isAuthenticated() && req.user instanceof USER) {
         return next();
     }
-    console.log('you are not authenticated!');
+    req.flash('error','you are not authenticated!');
     res.redirect('/user/signin');
 }
 
@@ -76,7 +80,61 @@ function bubbleSort(arr1,arr2) {
     return {arr1:arr1,arr2:arr2};
   }
   
+async function isOrderOwner(req,res,next){
+    const PENDING_ORDERS = require('./models/PENDING_ORDERS');
+    let orderId = req.params.orderId;
+    let order = await PENDING_ORDERS.findById(orderId);
+    if(order.userId.equals(req.user._id)){
+        next();
+    }
+    else{
+        console.log('you are not the owner of this order');
+        res.redirect(`/user/${req.user._id}/orderStatus`);
+    }
+}
 
+function deleteCanceledOrders(req,res,next) {
+    const PENDING_ORDERS = require('./models/PENDING_ORDERS');
+    cron.schedule('0 0 * * *', async () => {
+        try {
+            await PENDING_ORDERS.deleteMany({isCancel:true});
+            console.log("✅ Deleted canceled orders at 12 AM");
+        } catch (error) {
+            next(error);
+        }
+      });
+}
+
+async function sendEmail(to, subject, text){
+    try {
+        let transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_ID,
+            pass: process.env.EMAIL_PASSWORD,
+          },
+        });
+    
+        let mailOptions = {
+          from: `"JOY FOOD" ${process.env.EMAIL_ID}`, // Sender name and email
+          to: to, // Receiver's email
+          subject: subject, // Email subject
+        //   text: text, // Email body (plain text)
+          html: `<h1 style="color:blue;">OTP is ${text}</h1>`
+        };
+    
+        // ✅ Send the email
+        let info = await transporter.sendMail(mailOptions);
+        return info;
+      } catch (error) {
+        console.error("❌ Error sending email:", error);
+        throw error;
+      }
+}
+
+function generateOTP() {
+    return Math.floor(1000 + Math.random() * 9000); // Generates a 4-digit number
+  }
 
 module.exports = {
     getHashPassword,
@@ -87,5 +145,9 @@ module.exports = {
     getCurrentTime,
     getOrderProfit,
     getOrderGrossProfit,
-    bubbleSort
+    bubbleSort,
+    isOrderOwner,
+    deleteCanceledOrders,
+    sendEmail,
+    generateOTP
 }

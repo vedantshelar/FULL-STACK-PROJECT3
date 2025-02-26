@@ -1,11 +1,12 @@
 <% layout('./boilerplates/layout') %>
 
-    <body onload="loadHomeCartInfo()">
+    <body onload="loadHomeCartInfo()" style="overflow: hidden;height:100vh;">
         <div id="heroSection">
             <p>Delicious</p>
             <p>Food menu</p>
         </div>
         <%- include('./includes/searchbar.ejs') %>
+        <div style="overflow: auto;height: 100vh;">
         <div id="categorySection">
             <p class="subHeading">Category</p>
             <div>
@@ -97,4 +98,5 @@
                     <%}%>
             </div> 
         </div>
+    </div>
     </body> 

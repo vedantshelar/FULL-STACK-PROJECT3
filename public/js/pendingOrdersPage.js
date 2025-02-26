@@ -9,10 +9,10 @@ links.forEach(link => {
   }
 });
 
-// setInterval(() => {
-//   // Refresh the current page
-//   window.location.reload();
-// }, 60000);//run in every one minute 
+setInterval(() => {
+  // Refresh the current page
+  window.location.reload();
+}, 60000);//run in every one minute 
 
 async function startOrder(event){
   try {

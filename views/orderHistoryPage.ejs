@@ -1,68 +1,55 @@
 <% layout('./boilerplates/layout') %>
-<body>
-    <div id="heroSection">
-        <p>your's</p>
-        <p>Order History</p>
-    </div>
-    <div id="orderHistoryPageMainContainer">
-        <div class="categoryMenuListBox">
-            <div class="categoryMenuListInnerBox1">
-                <img src="https://cdn.grofers.com/assets/search/usecase/banner/sweet_corn_pizza_01.png" alt="">
-            </div>
-            <div class="categoryMenuListInnerBox2">
-                <div class="categoryMenuListBoxMenuInfo">
-                    <p class="categoryMenuListBoxMenuTitle">Corn Pizza <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
-                    <p class="categoryMenuListBoxMenuDescription">Qnty : 3</p>
-                </div> 
-                <div class="categoryMenuListBoxMenuPriceSection">
-                    <div>
-                        <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                    </div>
-                    <div>
-                        <button class="DeleteItemFromOrderHistoryBtn"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="categoryMenuListBox">
-            <div class="categoryMenuListInnerBox1">
-                <img src="https://www.sustainablecooks.com/wp-content/uploads/2022/12/FS-Onion-Pizza-3-scaled.jpg" alt="">
-            </div>
-            <div class="categoryMenuListInnerBox2">
-                <div class="categoryMenuListBoxMenuInfo">
-                    <p class="categoryMenuListBoxMenuTitle">Onion Pizza <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
-                    <p class="categoryMenuListBoxMenuDescription">Qnty : 3</p>
-                </div> 
-                <div class="categoryMenuListBoxMenuPriceSection">
-                    <div>
-                        <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
-                    </div>
-                    <div>
-                        <button class="DeleteItemFromOrderHistoryBtn"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
-                    </div>
-                </div>
-            </div>
+    <body>
+        <div id="heroSection">
+            <p>your's</p>
+            <p>Order History</p>
         </div>
-
-        <div class="categoryMenuListBox">
-            <div class="categoryMenuListInnerBox1">
-                <img src="/assets/paneer.jpg" alt="">
-            </div>
-            <div class="categoryMenuListInnerBox2">
-                <div class="categoryMenuListBoxMenuInfo">
-                    <p class="categoryMenuListBoxMenuTitle">Fry Panner <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
-                    <p class="categoryMenuListBoxMenuDescription">Qnty : 3</p>
-                </div> 
-                <div class="categoryMenuListBoxMenuPriceSection">
-                    <div>
-                        <i class="fa-solid fa-indian-rupee-sign"></i><span>250</span>
+        <div id="orderHistoryPageMainContainer">
+            <%if(orders && orders.length>0){%>
+                <%for(order of orders){%>
+                    <div class="categoryMenuListBox">
+                        <div class="categoryMenuListInnerBox1">
+                            <img src="<%=order.menuId.menuImg%>" alt="menu image">
+                        </div>
+                        <div class="categoryMenuListInnerBox2">
+                            <div class="categoryMenuListBoxMenuInfo">
+                                <p class="categoryMenuListBoxMenuTitle">
+                                    <%=order.menuId.menuName%>
+                                        <%if(order.menuId.type==='veg'){%>
+                                            <img src="/assets/veg.png" alt="veg" width="40px"
+                                                style="margin-left: 5px; margin-top: 5px; display: block;">
+                                            <%}else{%>
+                                                <img src="/assets/nonVeg.png" alt="veg" width="40px"
+                                                    style="margin-left: 5px; margin-top: 5px; display: block;">
+                                                <%}%>
+                                </p>
+                                <p class="categoryMenuListBoxMenuDescription">Qnty : <%=order.qnty%>
+                                </p>
+                            </div>
+                            <div class="categoryMenuListBoxMenuPriceSection">
+                                <div>
+                                    <%if(order.isFullPlate){%>
+                                        <i class="fa-solid fa-indian-rupee-sign"></i><span>
+                                            <%=order.menuId.fullFrontPrice*order.qnty%>/F
+                                        </span>
+                                        <%}else{%>
+                                            <i class="fa-solid fa-indian-rupee-sign"></i><span>
+                                                <%=order.menuId.halfFrontPrice*order.qnty%>/H
+                                            </span>
+                                            <%}%>
+                                </div>
+                                <div>
+                                    <button class="DeleteItemFromOrderHistoryBtn" orderId="<%=order._id%>"
+                                        onclick="deleteOrder(this)"><i class="fa-solid fa-trash"
+                                            style="color: #ffffff;"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <button class="DeleteItemFromOrderHistoryBtn"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
-                    </div>
-                </div>
-            </div>
+                    <%}%>
+            <%}else{%>
+                <h1>No Order</h1>
+            <%}%>
         </div>
-    </div>
-</body>
+    </body>
