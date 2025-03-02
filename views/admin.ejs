@@ -6,9 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/adminStatusbar.css">
 </head>
 
 <body onload="load()">
+    <%if(success && success.length>0){%>
+        <%- include('./includes/successStatusbar.ejs') %>
+        <%}%>
+          <%if(error && error.length>0){%>
+            <%- include('./includes/errorStatusbar.ejs') %>
+            <%}%>
     <div id="adminMainContainer">
         <div id="adminNavBarContainer">
             <div id="adminNavBar">
@@ -29,6 +36,9 @@
                 </a>
                 <a class="adminMenus" href="/admin/menu/edit">
                     <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a class="adminMenus" href="/admin/signout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                 </a>
             </div>
         </div>
@@ -170,6 +180,7 @@
         </div>
     </div>
     <script src="/js/utils.js"></script>
+    <script src="/js/statusbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/7e49fc305e.js" crossorigin="anonymous"></script>

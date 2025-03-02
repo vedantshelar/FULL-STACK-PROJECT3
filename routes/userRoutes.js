@@ -1,13 +1,12 @@
 const express = require('express');
-const MENU = require('../models/MENU');
+const userControllers = require('../controllers/userControllers');
 const USER = require('../models/USER');
-const PENDING_ORDERS = require('../models/PENDING_ORDERS');
 const express_session = require('express-session');
 let flash = require('connect-flash');
 var cookieParser = require('cookie-parser')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const {getHashPassword,isCorrectPassword,isAuthenticatedUser,isOrderOwner,generateOTP,sendEmail} = require('../utils');
+const {isCorrectPassword,isAuthenticatedUser,isOrderOwner} = require('../utils');
 const ADMIN = require('../models/ADMIN');
 const router = express.Router({ mergeParams: true });
 if(process.env.NODE_ENV!="production"){
@@ -71,32 +70,14 @@ passport.serializeUser((entity, done) => {
     }
   });
 
-router.get('/landing',(req,res)=>{
-    res.render('landingPage.ejs');
-});
+router.get('/landing',userControllers.landingPage);
 
 router.route('/signup')
-.get((req,res)=>{
-    res.render('signupPage.ejs');
-})
-.post(async(req,res,next)=>{
-    try {
-        console.log(req.body);
-        req.body.password = await getHashPassword(req.body.password); 
-        let user = new USER(req.body);
-        user = await user.save();
-        req.flash('success','user accout has been successfully created!');
-        res.redirect('/admin/signin');
-    } catch (error) {
-        req.flash('error','error occurred while creating user account');
-        res.redirect('/admin/signup');
-    }
-})
+.get(userControllers.singUpPage)
+.post(userControllers.createUserAccount);
 
 router.route('/signin')
-.get((req,res)=>{
-    res.render('signinPage.ejs');
-})
+.get(userControllers.signInPage)
 .post(passport.authenticate('user-local', {
     failureRedirect: '/user/signin',
     failureFlash: 'Invalid username or password'
@@ -110,172 +91,48 @@ router.route('/signin')
 });
 
 router.route('/signout')
-.get((req,res,next)=>{
-    req.logout((err) => {
-        if (err) {
-          return res.status(500).send('Error logging out');
-        }
-        req.flash('success','user has been logged out!');
-        res.redirect('/user/signin');  // Redirect after logout
-      });
-})
+.get(userControllers.signOut)
 
-router.post('/getMenusData',async(req,res,next)=>{
-    try {
-        let menuIdArr = req.body.cartInfo;
-        if(menuIdArr && menuIdArr.length>0){
-            let menus = await MENU.find({_id:{$in:menuIdArr}});
-            res.send(menus);
-        }else{
-            res.send('noMenusAddedToCart');
-        }
-    } catch (error) {
-        next(error);
-    }
-})
+router.post('/getMenusData',userControllers.getMenuData);
 
-router.get('/bestSelling',(req,res)=>{
-    res.render('bestSellingPage.ejs');
-})
+router.get('/bestSelling',userControllers.renderBestSellingPage);
 
-router.get('/category',(req,res)=>{
-    res.render('categoryOptions.ejs');
-})
+router.get('/category',userControllers.renderCategoryOptionPage);
 
-router.get('/password/forget',(req,res)=>{
-    res.render('forgetPasswordPage.ejs');
-})
+router.get('/password/forget',userControllers.renderForgetPasswordPage);
 
-router.post('/password/forget/opt',async (req,res,next)=>{
-    let email = req.body.email;
-    let user = await USER.findOne({email:email});
-    if(user){
-        const OTP = generateOTP();
-        await sendEmail(email,'Email For Changing OTP',OTP);
-        res.locals.email=email;
-        res.locals.otp=OTP;
-        res.render('enterOtpPage.ejs');
-    }else{
-        req.flash('error','Please Enter a Registered Email ID')
-        res.redirect('/user/password/forget');
-    }
-})
+router.post('/password/forget/opt',userControllers.renderEnterOtpPage);
 
 router.route('/:userEmail/password/change')
-.get(async (req,res,next)=>{
-    try {
-        let email = req.params.userEmail;
-        let user = await USER.findOne({email:email});
-        if(user){
-            res.locals.email=email;
-            res.render('changePasswordForm.ejs');
-        }else{
-            req.flash('error','Please Enter a Registered Email ID')
-            res.redirect('/user/password/forget');
-        }
-    } catch (error) {
-        next(error);   
-    }
-})
-.post(async (req,res,next)=>{
-    try {
-        let email = req.params.userEmail;
-        let user =await USER.findOne({email:email});
-        if (user) {
-            user.password= await getHashPassword(req.body.password1);
-            await user.save();
-            req.flash('success','your password has been successfully changed!');
-            res.redirect('/user/signin');
-        } else {
-            req.flash('error','something went wrong! please try again');
-            res.redirect('/user/signin');
-        }
-    } catch (error) {
-        next(error);
-    }
-})
+.get(userControllers.renderChangePasswordFormPage)
+.post(userControllers.changePassword)
 
 
-router.get('/:userId',isAuthenticatedUser,async(req,res,next)=>{
-    try {
-        let menus = await MENU.find({isBestSelling:true});
-        res.render('home.ejs',{menus}); 
-    } catch (error) {
-        next(error)
-    }
-});
+router.get('/:userId',isAuthenticatedUser,userControllers.renderHomePage);
 
-router.get('/category/:categoryName',async(req,res,next)=>{
-    try {
-        let categoryName = req.params.categoryName;
-        let menus = await MENU.find({category:categoryName});
-        if(menus){
-            res.render('categoryMenuList.ejs',{menus}); 
-        }else{
-            req.flash('error','no such menu category available');
-            res.redirect('/user');
-        }
-    } catch (error) {
-        next(error);
-    }
-})
+router.get('/category/:categoryName',userControllers.renderCategoryMenuListPage);
 
-router.get('/menu/:menuId',async(req,res,next)=>{
-    try {
-        let menuId = req.params.menuId;
-        let menu = await MENU.findById(menuId);
-        if(menu){
-            res.render('individualMenuPage.ejs',{menu});
-        }else{
-            req.flash('error','no such menu available');
-            res.redirect('/user');
-        }
-    } catch (error) {
-        next(error)
-    }
-})
+router.get('/menu/:menuId',userControllers.renderIndividualMenuPage);
 
-router.get('/:userId/cart',isAuthenticatedUser,(req,res)=>{
-    res.render('cartPage.ejs')
-})
+router.get('/:userId/cart',isAuthenticatedUser,userControllers.renderCartPage);
 
-router.get('/:userId/orderHistory',isAuthenticatedUser,async(req,res)=>{
-    let orders = await PENDING_ORDERS.find({userId:req.params.userId,isComplete:{$eq:true}}).populate('menuId');
-    res.render('orderHistoryPage.ejs',{orders}); 
-})
+router.get('/:userId/orderHistory',isAuthenticatedUser,userControllers.renderOrderHistoryPage);
 
 
-router.get('/:userId/orderStatus',isAuthenticatedUser,async(req,res,next)=>{
-    try {
-        const userId = req.params.userId;
-        const orders = await PENDING_ORDERS.find({userId:userId}).populate('menuId');
-        res.render('orderStatusPage.ejs',{orders});
-    } catch (error) {
-        next(error);
-    }
-})
+router.get('/:userId/orderStatus',isAuthenticatedUser,userControllers.renderOrderStatusPage)
 
 router.route('/:userId/:tableNo/placeOrder')
-.post(isAuthenticatedUser,async (req,res,next)=>{
-try {
-    const userId = req.params.userId;
-    const tableNo = req.params.tableNo;
-    console.log('table number : '+tableNo);
-    console.log(req.body);
-    await PENDING_ORDERS.insertMany(req.body.orderDetails);
-    req.flash('success','Your order has been placed');
-    res.json({redirectUrl:`/user/${userId}/orderStatus`});
-} catch (error) {
-    next(error);
-}
-});
+.post(isAuthenticatedUser,userControllers.placeOrder);
 
 router.route('/order/:orderId/delete')
-.delete(isAuthenticatedUser,isOrderOwner,async (req,res,next)=>{
-    let orderId = req.params.orderId;
-    await PENDING_ORDERS.findByIdAndDelete(orderId);
-    res.json({redirectRoute:`/user/${req.user._id}/orderStatus`})
-})
+.delete(isAuthenticatedUser,isOrderOwner,userControllers.destroyPendingOrder)
 
+
+// i have used the same error page called adminErrorPage for user and admin
+
+router.use(userControllers.renderErrorPage);
+
+
+router.all('*',userControllers.renderPageNotFoundPage);
 
 module.exports=router;

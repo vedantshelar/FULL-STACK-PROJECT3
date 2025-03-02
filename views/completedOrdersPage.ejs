@@ -32,6 +32,9 @@
                 <a class="adminMenus" href="/admin/menu/edit">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                <a class="adminMenus" href="/admin/signout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
             </div>
         </div>
         <div id="adminDashboardContainer">
@@ -43,149 +46,51 @@
                 <p >Completed Orders</p>
                 <div id="adminPanelPendingOrdersInnerContainer">
 
-                    <div class="pendingOrdersBox">
-                        <div class="pendingOrdersBoxMenuImg">
-                            <img src="https://cdn.grofers.com/assets/search/usecase/banner/sweet_corn_pizza_01.png" alt="menu image">
-                        </div>
-                        <div class="pendingOrdersBoxAllDetails">
-                            <div class="pendingOrdersBoxOrderDetails">
-                                <div>
-                                    <span>Order Details</span>
-                                </div>
-                                <div>
-                                    <p class="pendingOrdersPageMenuName">Corn Pizza</p>
+                    <% for(order of orders) {%>
+                        <div class="pendingOrdersBox">
+                            <div class="pendingOrdersBoxMenuImg">
+                                <img src="<%=order.menuId.menuImg%>" alt="menu image">
+                            </div>
+                            <div class="pendingOrdersBoxAllDetails">
+                                <div class="pendingOrdersBoxOrderDetails">
                                     <div>
-                                        <span>Type : Half</span>
-                                        <span>Qnty : 3</span>
-                                        <span>,12/03/2025</span>
-                                        <button>veg</button>
+                                        <span>Order Details</span>
+                                    </div>
+                                    <div>
+                                        <p class="pendingOrdersPageMenuName"><%=order.menuId.menuName%></p>
+                                        <div>
+                                            <%if(order.isFullPlate){%>
+                                                <span>Type : Full</span>
+                                            <%}else{%>
+                                                <span>Type : Half</span>
+                                                <%}%>
+                                            <span>Qnty : <%=order.qnty%></span>
+                                            <span>,<%=order.orderCompleteDate%></span>
+                                            <%if(order.menuId.type=='veg'){%>
+                                                <button>veg</button>
+                                            <%}else{%>
+                                                <button>non-veg</button>
+                                                <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pendingOrdersBoxCustomerDetails">
+                                    <div>
+                                        Customer Details
+                                    </div>
+                                    <div>
+                                        <p><%=order.userId.name%></p>
+                                        <p>, Mob No :<%=order.userId.mobileNumber%></p>
+                                    </div>
+                                </div>
+                                <div class="pendingOrdersBoxControls">
+                                    <div>
+                                        <button>Completed</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pendingOrdersBoxCustomerDetails">
-                                <div>
-                                    Customer Details
-                                </div>
-                                <div>
-                                    <p>Vedant Dadasaheb Shelar</p>
-                                    <p>, Mob No :9321677312</p>
-                                </div>
-                            </div>
-                            <div class="pendingOrdersBoxControls">
-                                <div>
-                                    <button>Completed</button>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-
-                    <div class="pendingOrdersBox">
-                        <div class="pendingOrdersBoxMenuImg">
-                            <img src="/assets/corn.jpg" alt="menu image">
-                        </div>
-                        <div class="pendingOrdersBoxAllDetails">
-                            <div class="pendingOrdersBoxOrderDetails">
-                                <div>
-                                    <span>Order Details</span>
-                                </div>
-                                <div>
-                                    <p class="pendingOrdersPageMenuName">Corn Dish</p>
-                                    <div>
-                                        <span>Type : -</span>
-                                        <span>Qnty : 2</span>
-                                        <span>,12/03/2025</span>
-                                        <button>veg</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pendingOrdersBoxCustomerDetails">
-                                <div>
-                                    Customer Details
-                                </div>
-                                <div>
-                                    <p>Abhishek Dadasaheb Shelar</p>
-                                    <p>, Mob No :9321677312</p>
-                                </div>
-                            </div>
-                            <div class="pendingOrdersBoxControls">
-                                <div>
-                                    <button>Completed</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pendingOrdersBox">
-                        <div class="pendingOrdersBoxMenuImg">
-                            <img src="/assets/paneer.jpg" alt="menu image">
-                        </div>
-                        <div class="pendingOrdersBoxAllDetails">
-                            <div class="pendingOrdersBoxOrderDetails">
-                                <div>
-                                    <span>Order Details</span>
-                                </div>
-                                <div>
-                                    <p class="pendingOrdersPageMenuName">Paneer Tanduri</p>
-                                    <div>
-                                        <span>Type : -</span>
-                                        <span>Qnty : 2</span>
-                                        <span>,12/03/2025</span>
-                                        <button>veg</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pendingOrdersBoxCustomerDetails">
-                                <div>
-                                    Customer Details
-                                </div>
-                                <div>
-                                    <p>Abhishek Dadasaheb Shelar</p>
-                                    <p>, Mob No :9321677312</p>
-                                </div>
-                            </div>
-                            <div class="pendingOrdersBoxControls">
-                                <div>
-                                    <button>Completed</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pendingOrdersBox">
-                        <div class="pendingOrdersBoxMenuImg">
-                            <img src="/assets/dal.jpg" alt="menu image">
-                        </div>
-                        <div class="pendingOrdersBoxAllDetails">
-                            <div class="pendingOrdersBoxOrderDetails">
-                                <div>
-                                    <span>Order Details</span>
-                                </div>
-                                <div>
-                                    <p class="pendingOrdersPageMenuName">Paneer Tanduri</p>
-                                    <div>
-                                        <span>Type : -</span>
-                                        <span>Qnty : 2</span>
-                                        <span>,12/03/2025</span>
-                                        <button>veg</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pendingOrdersBoxCustomerDetails">
-                                <div>
-                                    Customer Details
-                                </div>
-                                <div>
-                                    <p>Abhishek Dadasaheb Shelar</p>
-                                    <p>, Mob No :9321677312</p>
-                                </div>
-                            </div>
-                            <div class="pendingOrdersBoxControls">
-                                <div>
-                                    <button>Completed</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%}%>
 
                 </div>
             </div>

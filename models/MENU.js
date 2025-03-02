@@ -41,14 +41,12 @@ const menuSchema = new Schema({
     description: {
         type: String,
         required: true,
-        maxlength: 200, // Ensures a minimum length of 50 characters
         trim: true,
         default: 'no descrition has been provided',
     },
     ingredient: {
         type: String,
         required: true,
-        maxlength: 200, // Ensures a minimum length of 50 characters
         trim: true,
         default: 'no ingredient has been provided',
     },

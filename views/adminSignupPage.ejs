@@ -6,9 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/adminSigninPage.css">
+    <link rel="stylesheet" href="/css/adminStatusbar.css">
 </head>
 
 <body>
+    <%if(success && success.length>0){%>
+        <%- include('./includes/successStatusbar.ejs') %>
+        <%}%>
+          <%if(error && error.length>0){%>
+            <%- include('./includes/errorStatusbar.ejs') %>
+            <%}%>
     <div id="adminSigninPageMainContainer">
         <div id="adminSigninPageMainInnerContainer">
         <div id="adminSigninPageImgContainer">
@@ -30,13 +37,15 @@
                     <input type="password" name="password" placeholder="Enter your password">
                 </div>
                 <div class="adminForgetPasswordformControls">
-                    <a href="#">Forget Password</a>
+                    <a href="/admin/signin">Sign In</a>
                 </div>
                 <button class="adminSigninBtn" type="submit">Sign Up</button>
             </form>
         </div>
     </div>
 </div>
+<script src="https://kit.fontawesome.com/7e49fc305e.js" crossorigin="anonymous"></script>
+<script src="/js/statusbar.js"></script>
 </body>
 
 </html>

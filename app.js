@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const engine = require('ejs-mate');
 const methodOverride = require('method-override');
 const {deleteCanceledOrders} = require('./utils');
+const { renderPageNotFoundPage } = require('./controllers/userControllers');
 const PORT = 3000;
 app.listen(PORT,"0.0.0.0",()=>{
     console.log("server is listening on port number "+PORT);
@@ -43,6 +44,7 @@ deleteCanceledOrders();
 
 
 app.use((err,req,res,next)=>{
-    console.log(err);
     res.send('some error occured');
 })
+
+app.all('*',renderPageNotFoundPage);

@@ -2,6 +2,7 @@
 
 function loadCartMenusAndUpdateTotalItemPrice() {
     loadCartMenus().then((res) => {
+        hideHalfPriceForSomeCategory();
         changeTheTotalPirceBasedOnHalfAndFullDish();
         updateTotalItemPrice();
     })
@@ -24,6 +25,7 @@ async function loadCartMenus() {
                     let menuElement = document.createElement('div');
                     menuElement.setAttribute('itemNo', i);
                     menuElement.setAttribute('menuId', menu._id);
+                    menuElement.setAttribute('category',menu.category);
                     menuElement.classList.add('categoryMenuListBox');
                     menuElement.classList.add('cartPageMenuListBox');
                     if (menu.type === 'veg') {
@@ -42,7 +44,7 @@ async function loadCartMenus() {
                                 <input type="radio" name="price${i}" value="${menu.fullFrontPrice}" class="cartPageFUllPrice" checked>
                                 <span>${menu.fullFrontPrice}/Full</span>
                             </div> 
-                            <div>
+                            <div class="halfPriceContainer">
                                 <input type="radio" name="price${i}" value="${menu.halfFrontPrice}" class="cartPageHalfPrice">
                                 <span>${menu.halfFrontPrice}/Half</span>
                             </div>
@@ -233,8 +235,18 @@ placeOrderBtn.addEventListener('click',async (event)=>{
                 orderDetails.push(singleOrderDetail);
             }
         }
-        const response = await axios.post(`http://localhost:3000/user/${user._id}/${tableNo}/placeOrder`, {orderDetails});
+        const response = await axios.post(`${websiteRootUrl}/user/${user._id}/${tableNo}/placeOrder`, {orderDetails});
         localStorage.setItem("cartInfo",JSON.stringify([]));
         window.location.href=response.data.redirectUrl;
     }
 })
+
+function hideHalfPriceForSomeCategory(){
+    let menuItems = document.querySelectorAll('.cartPageMenuListBox');
+    for(menuItem of menuItems){
+        let menuCategory = menuItem.getAttribute('category');
+        if(menuCategory=='drink' || menuCategory=='burger' || menuCategory=='sandwich' || menuCategory=='pizza'){
+            menuItem.querySelector('.halfPriceContainer').style.visibility='hidden';
+        }
+    }
+}

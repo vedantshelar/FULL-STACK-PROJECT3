@@ -8,9 +8,16 @@
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/pendingOrdersPage.css">
     <link rel="stylesheet" href="/css/addMenuFormPage.css">
+    <link rel="stylesheet" href="/css/adminStatusbar.css">
 </head>
 
 <body>
+    <%if(success && success.length>0){%>
+        <%- include('./includes/successStatusbar.ejs') %>
+        <%}%>
+          <%if(error && error.length>0){%>
+            <%- include('./includes/errorStatusbar.ejs') %>
+            <%}%>
     <div id="adminMainContainer">
         <div id="adminNavBarContainer">
             <div id="adminNavBar">
@@ -31,6 +38,9 @@
                 </a>
                 <a class="adminMenus" href="/admin/menu/edit">
                     <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a class="adminMenus" href="/admin/signout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                 </a>
             </div>
         </div>
@@ -121,6 +131,7 @@
         const menu = <%-JSON.stringify(menu)%>
     </script>
     <script src="https://kit.fontawesome.com/7e49fc305e.js" crossorigin="anonymous"></script>
+<script src="/js/statusbar.js"></script>
     <script src="/js/pendingOrdersPage.js"></script>
     <script src="/js/editMenuFormPage.js"></script>
 </body>

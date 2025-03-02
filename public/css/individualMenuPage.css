@@ -24,7 +24,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 95vh;
+    height: 100vh;
     position: relative;
 }
 /* backBtn style */
@@ -134,7 +134,7 @@ width: 100%;
 #individualMenuPageAddToCartContainer{
     width: 100%;
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     height: 10%;
 }
 

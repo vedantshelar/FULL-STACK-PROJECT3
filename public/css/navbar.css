@@ -63,7 +63,7 @@ body{
     background-color: var(--button-color);
     left: -100vw;
     transition: all 0.2s;
-
+    overflow-y: auto;
 }
 
 .active{

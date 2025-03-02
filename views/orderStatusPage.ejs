@@ -1,11 +1,11 @@
 <% layout('./boilerplates/layout') %>
 
-    <body>
+    <body style="overflow: hidden;">
         <div id="heroSection">
             <p>current</p>
             <p>Order Status</p>
         </div>
-        <div id="orderHistoryPageMainContainer">
+        <div id="orderHistoryPageMainContainer" style="overflow-y: auto; height: 85vh; padding-top: 10px;">
             <% if(orders && orders.length>0){%>
                 <% for(order of orders) {%>
                     <div class="categoryMenuListBox">

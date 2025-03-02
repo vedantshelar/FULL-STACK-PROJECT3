@@ -756,3 +756,5 @@ function getCurrentDay() {
   let currDay = currDate.split('-')[2];
   return currDay;
 }
+
+console.log(getCurrentYear()+":"+getCurrentMonth()+":"+getCurrentDay())
