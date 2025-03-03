@@ -191,7 +191,6 @@ const placeOrder = async (req,res,next)=>{
         const userId = req.params.userId;
         const tableNo = req.params.tableNo;
         console.log('table number : '+tableNo);
-        console.log(req.body);
         await PENDING_ORDERS.insertMany(req.body.orderDetails);
         req.flash('success','Your order has been placed');
         res.json({redirectUrl:`/user/${userId}/orderStatus`});

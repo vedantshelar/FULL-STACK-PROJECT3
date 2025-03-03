@@ -219,7 +219,6 @@ const renderAdminProfilePage = async (req, res, next) => {
     try {
         const adminId = req.params.adminId;
         let admin = await ADMIN.findById(adminId);
-        console.log(admin);
         res.send('profile page of admin');
     } catch (error) {
         next(error);
@@ -284,7 +283,6 @@ const markPlacedOrderAsStart = async (req, res, next) => {
 const cancelPlacedOrder = async (req, res, next) => {
     try {
         const orderId = req.params.orderId;
-        console.log(orderId);
         await PENDING_ORDERS.findByIdAndUpdate(orderId, { isCancel: true });
         req.flash('success','order has been canceled');
         res.send(true);
@@ -315,7 +313,6 @@ const completeOrder = async (req, res, next) => {
 
         await COMPLETE_ORDERS.create(newOrder);
         await PENDING_ORDERS.findByIdAndUpdate(orderId, { isComplete: true });
-        console.log('Order has been completed');
         res.send(true);
     } catch (error) {
         next(error);

@@ -2,9 +2,7 @@ const express = require('express');
 const ADMIN = require('../models/ADMIN');
 const multer = require('multer');
 const storage = require('../cloudinaryConfig');
-const express_session = require('express-session');
 let flash = require('connect-flash');
-var cookieParser = require('cookie-parser')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const {isCorrectPassword, isAuthenticatedAdmin} = require('../utils');
@@ -17,8 +15,6 @@ if (process.env.NODE_ENV != "production") {
 
 //middlewares 
 router.use(flash());
-router.use(cookieParser());
-router.use(express_session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 router.use(passport.initialize());
 router.use(passport.session());
 router.use((req, res, next) => {
