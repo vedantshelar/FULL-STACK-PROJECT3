@@ -17,7 +17,7 @@ async function loadCartMenus() {
             const newPostRequest = {
                 cartInfo: cartInfo
             }
-            const menus = await axios.post("http://localhost:3000/user/getMenusData", newPostRequest);
+            const menus = await axios.post(`${websiteRootUrl}/user/getMenusData`, newPostRequest);
             if (menus.data != 'noMenusAddedToCart') {
                 let categoryMenuListMainContainer = document.querySelector('#categoryMenuListMainContainer');
                 let i = 0;
