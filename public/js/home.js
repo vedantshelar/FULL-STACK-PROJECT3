@@ -41,3 +41,22 @@ popularSectionMainContainer.addEventListener('click',(event)=>{
     }
 })
 
+
+let search = document.querySelector('#search');
+
+search.addEventListener('change',(e)=>{
+let searchValue = e.target.value.toLowerCase();
+    searchMenuByName(searchValue);
+})
+
+function searchMenuByName(name){
+    let popularSectionMenuItemBox = document.querySelectorAll('.popularSectionMenuItemBox');
+    for(menu of popularSectionMenuItemBox){
+        let menuName = menu.getAttribute('menuName');
+        if(menuName.includes(name)){
+            menu.style.display='flex';
+        }else{
+            menu.style.display='none';
+        }
+    }
+}

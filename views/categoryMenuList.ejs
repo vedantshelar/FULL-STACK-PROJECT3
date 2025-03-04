@@ -3,7 +3,7 @@
     <body onload="loadCategoryMenuListCartInfo()">
         <div id="heroSection">
             <p>Explore</p>
-            <p>Pizza Menu's</p>
+            <p><%=category%> Menu's</p>
         </div>
         <%- include('./includes/searchbar.ejs') %>
             <div id="categoryMenuListMainContainer">
@@ -15,7 +15,7 @@
                             </a>
                             <div class="categoryMenuListInnerBox2">
                                 <a class="categoryMenuListBoxMenuInfo" href="/user/menu/<%=menu._id%>">
-                                    <p class="categoryMenuListBoxMenuTitle"><%=menu.menuName%> <%if(menu.type=='veg'){%>
+                                    <p class="categoryMenuListBoxMenuTitle"><%if(menu.menuName.length>25){%> <%=menu.menuName.slice(0,25)%>... <%}else{%> <%=menu.menuName%> <%}%> <%if(menu.type=='veg'){%>
                                          <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"><%}else if(menu.type=='nonVeg'){%><img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"><%}%></p>
                                     <p class="categoryMenuListBoxMenuDescription">
                                         <%=menu.description.slice(0,100)%>....

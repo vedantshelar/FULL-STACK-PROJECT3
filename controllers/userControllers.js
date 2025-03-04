@@ -125,7 +125,7 @@ const changePassword = async (req,res,next)=>{
 
 const renderHomePage = async(req,res,next)=>{
     try {
-        let menus = await MENU.find({isBestSelling:true});
+        let menus = await MENU.find({});
         res.render('home.ejs',{menus}); 
     } catch (error) {
         next(error)
@@ -137,6 +137,7 @@ const renderCategoryMenuListPage = async(req,res,next)=>{
         let categoryName = req.params.categoryName;
         let menus = await MENU.find({category:categoryName});
         if(menus){
+            res.locals.category = categoryName;
             res.render('categoryMenuList.ejs',{menus}); 
         }else{
             req.flash('error','no such menu category available');

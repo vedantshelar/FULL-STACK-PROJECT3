@@ -1,11 +1,11 @@
 <% layout('./boilerplates/layout') %>
-<body>
+<body style="overflow: hidden;">
     <div id="heroSection">
         <p>best</p>
         <p>Selling Menu's</p>
     </div>
     <%- include('./includes/searchbar.ejs') %>
-    <div id="categoryMenuListMainContainer">
+    <div id="categoryMenuListMainContainer" style="overflow-y: auto; height: 80vh; padding-top: 10px;">
 
         <%for(menu of menus){%>
             <div class="categoryMenuListBox">

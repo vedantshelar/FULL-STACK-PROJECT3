@@ -66,11 +66,11 @@
             </div>
         </div>
         <div id="popularSection">
-            <p class="subHeading">Best Selling</p>
+            <p class="subHeading">Our Menu's</p>
             <div id="popularSectionMainContainer">
                 <% if(menus.length>0){%>
                     <% for(menu of menus){%>
-                        <div class="popularSectionMenuItemBox">
+                        <div class="popularSectionMenuItemBox" menuName="<%=menu.menuName%>">
                             <a href="/user/menu/<%=menu._id%>">
                                 <div class="likeSection">
                                     <i class="fa-solid fa-heart" style="color: #ff0033;"></i>
