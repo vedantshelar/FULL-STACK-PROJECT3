@@ -34,7 +34,7 @@ async function loadCartMenus() {
                     </a>
                     <div class="categoryMenuListInnerBox2">
                         <a class="categoryMenuListBoxMenuInfo" href="/user/menu/${menu._id}">
-                            <p class="categoryMenuListBoxMenuTitle">${menu.menuName} <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
+                            <p class="categoryMenuListBoxMenuTitle">${menu.menuName.length > 25 ? menu.menuName.slice(0,25)+"..." : menu.menuName} <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"></p>
                             <p class="categoryMenuListBoxMenuDescription">
                                 ${menu.description.slice(0,70)}...
                             </p>
@@ -44,10 +44,13 @@ async function loadCartMenus() {
                                 <input type="radio" name="price${i}" value="${menu.fullFrontPrice}" class="cartPageFUllPrice" checked>
                                 <span>${menu.fullFrontPrice}/Full</span>
                             </div> 
-                            <div class="halfPriceContainer">
+                            ${(menu.category=='pizza' || menu.category=='burger' || menu.category=='sandwich' || menu.category=='drink') ? ` <div class="halfPriceContainer" style="display: none;">
                                 <input type="radio" name="price${i}" value="${menu.halfFrontPrice}" class="cartPageHalfPrice">
                                 <span>${menu.halfFrontPrice}/Half</span>
-                            </div>
+                            </div>` : ` <div class="halfPriceContainer">
+                                <input type="radio" name="price${i}" value="${menu.halfFrontPrice}" class="cartPageHalfPrice">
+                                <span>${menu.halfFrontPrice}/Half</span>
+                            </div>`}
                         </div>
                         <div class="cartPageCookingRequestBox"> 
                             <input type="text" name="cookingRequest" placeholder="cooking request if any">
@@ -70,7 +73,7 @@ async function loadCartMenus() {
                     </a>
                     <div class="categoryMenuListInnerBox2">
                         <a class="categoryMenuListBoxMenuInfo" href="/user/menu/${menu._id}">
-                            <p class="categoryMenuListBoxMenuTitle">${menu.menuName} <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"></p>
+                            <p class="categoryMenuListBoxMenuTitle">${menu.menuName.length > 25 ? menu.menuName.slice(0,25)+"..." : menu.menuName} <img src="/assets/veg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: none;"> <img src="/assets/nonVeg.png" alt="veg" width="40px" style="margin-left: 5px; margin-top: 5px; display: block;"></p>
                             <p class="categoryMenuListBoxMenuDescription">
                                 ${menu.description.slice(0,70)}...
                             </p>
@@ -80,10 +83,13 @@ async function loadCartMenus() {
                                 <input type="radio" name="price${i}" value="${menu.fullFrontPrice}" class="cartPageFUllPrice" checked>
                                 <span>${menu.fullFrontPrice}/Full</span>
                             </div> 
-                            <div>
+                           ${(menu.category=='pizza' || menu.category=='burger' || menu.category=='sandwich' || menu.category=='drink') ? ` <div class="halfPriceContainer" style="display: none;">
                                 <input type="radio" name="price${i}" value="${menu.halfFrontPrice}" class="cartPageHalfPrice">
                                 <span>${menu.halfFrontPrice}/Half</span>
-                            </div>
+                            </div>` : ` <div class="halfPriceContainer">
+                                <input type="radio" name="price${i}" value="${menu.halfFrontPrice}" class="cartPageHalfPrice">
+                                <span>${menu.halfFrontPrice}/Half</span>
+                            </div>`}
                         </div>
                         <div class="cartPageCookingRequestBox"> 
                             <input type="text" name="cookingRequest" placeholder="cooking request if any">

@@ -44,7 +44,7 @@ popularSectionMainContainer.addEventListener('click',(event)=>{
 
 let search = document.querySelector('#search');
 
-search.addEventListener('change',(e)=>{
+search.addEventListener('input',(e)=>{
 let searchValue = e.target.value.toLowerCase();
     searchMenuByName(searchValue);
 })

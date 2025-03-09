@@ -15,7 +15,11 @@
                         <div class="categoryMenuListInnerBox2">
                             <div class="categoryMenuListBoxMenuInfo">
                                 <p class="categoryMenuListBoxMenuTitle">
-                                    <%=order.menuId.menuName%>
+                                    <%if(order.menuId.menuName.length>35){%>
+                                            <%=order.menuId.menuName.slice(0,25)%>...
+                                        <%}else{%>
+                                            <%=order.menuId.menuName%>
+                                            <%}%>
                                         <%if(order.menuId.type==='veg'){%><img src="/assets/veg.png" alt="veg"
                                                 width="40px" style="margin-left: 5px; margin-top: 5px; display: block;">
                                             <%}else{%>
