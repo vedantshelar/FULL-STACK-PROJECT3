@@ -42,3 +42,6 @@ Tools : QR Code & NFC Integration, Chart.js
 This system transforms traditional restaurant ordering with a contactless, efficient, and interactive experience for both customers and owners. Enhance customer satisfaction, reduce wait times, and gain valuable insights!
 
 
+### 🏠 Customer Side
+![Landing Page](./screenshots/userLandingPage.jpeg)
+
