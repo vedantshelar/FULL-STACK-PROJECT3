@@ -139,7 +139,7 @@ grossProfitBtn.addEventListener('click', () => {
 
 profitBtn.addEventListener('click', () => {
   let grossProfitAndProfitLabel = document.querySelector('#grossProfitAndProfitLabel');
-  grossProfitAndProfitLabel.innerText = "Profit";
+  grossProfitAndProfitLabel.innerText = "Revenue";
   profitBtn.classList.remove('adminPanelInnerMainContainer1GraphContainerDisableBtn');
   grossProfitBtn.classList.add('adminPanelInnerMainContainer1GraphContainerDisableBtn');
   displayTotalProfitGraph();

@@ -41,3 +41,25 @@ categoryMenuListMainContainer.addEventListener('click',(event)=>{
         }
     }
 })
+
+// search function
+
+let categoryMenuListSearch = document.querySelector('#search');
+
+// categoryMenuListSearch.addEventListener('input',(event)=>{
+    
+// })
+
+categoryMenuListSearch.addEventListener('input',function(event){
+    let searchValue = event.target.value.toLowerCase();
+
+    let categoryMenuListBoxes = document.querySelectorAll('.categoryMenuListBox');
+    for(categoryMenuListBox of categoryMenuListBoxes){
+        let menuName = categoryMenuListBox.querySelector('.categoryMenuListBoxMenuTitle').innerText;
+        if(menuName.includes(searchValue)){
+            categoryMenuListBox.style.display='flex';
+        }else{
+            categoryMenuListBox.style.display='none';
+        }
+    }
+}) 
